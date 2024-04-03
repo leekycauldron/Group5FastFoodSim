@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Button
+comment0.text=\r\n\ A\ modular\ button\ class\ that\ can\ change\ color,\ size,\ and\ shape(?).\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=bgColor\ width\ height\ content
+comment1.target=Button(greenfoot.Color,\ int,\ int,\ java.lang.String)
+comment2.params=
+comment2.target=void\ init()
+comment3.params=
+comment3.target=void\ act()
+numComments=4
