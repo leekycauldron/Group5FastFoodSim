@@ -34,6 +34,9 @@ public class WelcomeWorld extends World
         addObject(val3,getWidth()/2, 200);
         addObject(playBtn,getWidth()/2,300);
         playBtn.init();
+        playBtn.setOnClickAction(() -> {
+            Greenfoot.setWorld(new MainWorld());
+        });
     }
     /**
      * Prepare the world for the start of the program.
@@ -44,5 +47,8 @@ public class WelcomeWorld extends World
         addObject(titleLabel,getWidth()/2,getHeight()/2);
         addObject(startBtn, getWidth()/2, getHeight()/2+100);
         startBtn.init();
+        startBtn.setOnClickAction(() -> {
+            showMenu();
+        });
     }
 }

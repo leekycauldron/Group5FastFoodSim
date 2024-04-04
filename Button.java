@@ -13,6 +13,8 @@ public class Button extends Actor
     private int height;
     private String content;
     private Label contentLabel;
+    private Runnable clickAction = null;
+
     
     public Button(Color bgColor, int width, int height, String content) {
         this.bgColor = bgColor;
@@ -32,13 +34,17 @@ public class Button extends Actor
         contentLabel = new Label(content,height/2);
         getWorld().addObject(contentLabel, getX(),getY());
     }
+    
+    
+    // Chat GPT introduced me to Runnable type
+    public void setOnClickAction(Runnable clickAction) {
+        this.clickAction = clickAction;
+    }
+    
     public void act()
     {
         if(Greenfoot.mouseClicked(this) || Greenfoot.mouseClicked(contentLabel)) {
-            // Remove title and button and show sim menu
-            
-            WelcomeWorld w = (WelcomeWorld) getWorld();
-            w.showMenu();
+            clickAction.run();
         }
     }
 }
