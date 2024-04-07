@@ -1,7 +1,11 @@
 #BlueJ class context
 comment0.target=Customer
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Customer\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=void\ act()
+comment1.params=aClass
+comment1.target=greenfoot.Actor\ findNearestActor(java.lang.Class)
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ Customer\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-numComments=2
+comment2.params=x1\ y1\ x2\ y2
+comment2.target=double\ getDistance(int,\ int,\ int,\ int)
+comment3.params=
+comment3.target=void\ act()
+numComments=4

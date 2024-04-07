@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.ArrayList;
 /**
  * Write a description of class Customer here.
  * 
@@ -12,8 +12,44 @@ public class Customer extends Actor
      * Act - do whatever the Customer wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
+    // TODO: put this in a separate "utils" class because it is likely other classes may use the function
+    // Used in a previous vehicle sim
+    // Find the nearest actor given the class specification in argument (Employee.class, Actor.class, Counter.class all work)
+    protected <T extends Actor> T findNearestActor(Class<T> aClass) {
+        // try catch needed for some reason as getting nearest actor if there is none returns error
+        try{
+            ArrayList<T> actors = (ArrayList<T>)getWorld().getObjects(aClass);
+            T nearestActor = null;
+            double nearestDistance = Double.MAX_VALUE; // Set to biggest value and then update when a value is smaller.
+    
+            for (T a : actors) {
+                double distance = getDistance(getX(), getY(), a.getX(), a.getY());
+                if (distance < nearestDistance) {
+                    nearestDistance = distance;
+                    nearestActor = a;
+                }
+            }
+    
+            return nearestActor;
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
+    
+    // Used in a previous vehicle sim
+    // Get distance between two points using simple pythagorean theorem math
+    protected double getDistance(int x1, int y1, int x2, int y2) {
+        return Math.hypot(x2 - x1, y2 - y1);
+    }
+    
     public void act() 
     {
-        // Add your action code here.
+        Counter nearestCounter = findNearestActor(Counter.class);
+        if (!intersects(nearestCounter)) {
+            turnTowards(nearestCounter.getX(), nearestCounter.getY());
+            move(1); // Adjust the speed as needed
+        }
     }    
 }
