@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.ArrayList;
 /**
  * Write a description of class Counter here.
  * 
@@ -8,14 +8,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Counter extends Equipment
 {
-    /**
-     * Act - do whatever the Counter wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    protected ArrayList<ArrayList<String>> orders = new ArrayList<>();
     public Counter(){
         GreenfootImage i = getImage();
         i.scale(50,50);
         setImage(i);
+    }
+    public void order(ArrayList<String> order) {
+        // Take order and save it to this counter
+        orders.add(order);
     }
     public void act()
     {

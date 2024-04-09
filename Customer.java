@@ -8,10 +8,14 @@ import java.util.ArrayList;
  */
 public class Customer extends Actor
 {
-    /**
-     * Act - do whatever the Customer wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    protected String[] foodItems = {"burger", "hotdog"};
+    protected String[] sideItems = {"fries","cola"};
+    protected ArrayList<String> order = new ArrayList<String>();
+    protected boolean ordered = false;
+    
+    public Customer() {
+        
+    }
     
     // TODO: put this in a separate "utils" class because it is likely other classes may use the function
     // Used in a previous vehicle sim
@@ -44,12 +48,34 @@ public class Customer extends Actor
         return Math.hypot(x2 - x1, y2 - y1);
     }
     
+    // Order if haven't ordered yet
+    // Order a random amount of food items and then a random amount of side items
+    protected void order(Counter counter) {
+        if(!ordered){
+            int foodAmt = Greenfoot.getRandomNumber(foodItems.length+1)+1; // Cannot be zero
+            int sidesAmt = Greenfoot.getRandomNumber(sideItems.length+1);
+            for(int i = 0; i < foodAmt; i++) {
+                order.add(foodItems[Greenfoot.getRandomNumber(foodItems.length)]);
+            }
+            
+            for(int i = 0; i < sidesAmt; i++) {
+                order.add(sideItems[Greenfoot.getRandomNumber(sideItems.length)]);
+            }
+            System.out.println(order);
+            counter.order(order);
+            ordered = true;
+        }
+    }
+    
     public void act() 
     {
         Counter nearestCounter = findNearestActor(Counter.class);
         if (!intersects(nearestCounter)) {
             turnTowards(nearestCounter.getX(), nearestCounter.getY());
             move(1); // Adjust the speed as needed
+            setRotation(0); // Prevent customers from rotating as it would look weird
+        } else {
+            order(nearestCounter);
         }
     }    
 }

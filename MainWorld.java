@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MainWorld extends World
 {
-
+    public static final int COOK_COUNT = 3;
+    public static final int COUNTER_COUNT = 5;
     /**
      * Constructor for objects of class MainWorld.
      * 
@@ -18,8 +19,15 @@ public class MainWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
         
-        Counter c = new Counter();
-        addObject(c, getWidth()/2,getHeight()/2);
+        // Spawn all equipment and employees based on the counts
+        for(int i = 0; i < COUNTER_COUNT;i++) {
+            Counter counter = new Counter();
+            addObject(counter, (getWidth()/2)+50*i,getHeight()/2);
+        }
+        for(int i = 0; i < COOK_COUNT; i++) {
+            Cook cook = new Cook();
+            addObject(cook,50*i,0);
+        }
     }
     
     public void act() {
