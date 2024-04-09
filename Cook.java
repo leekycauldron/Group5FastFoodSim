@@ -19,7 +19,7 @@ public class Cook extends Employee
     
     public void wander() {
         // Randomly change direction
-        if (Greenfoot.getRandomNumber(100) < 10) { // 10% chance to change direction
+        if (Greenfoot.getRandomNumber(100) == 101) { // 10% chance to change direction
             direction += Greenfoot.getRandomNumber(180) - 90; // Change direction randomly by -90 to +90 degrees
             direction = (direction + 360) % 360; // Ensure the direction is within 0-359 degrees
         }
@@ -43,7 +43,7 @@ public class Cook extends Employee
         if (working) {
             
         } else {
-            
+            wander();
         }
     }
 }

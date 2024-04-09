@@ -26,7 +26,7 @@ public class MainWorld extends World
         }
         for(int i = 0; i < COOK_COUNT; i++) {
             Cook cook = new Cook();
-            addObject(cook,50*i,0);
+            addObject(cook,100+50*i,100);
         }
     }
     
