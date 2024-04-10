@@ -1,22 +1,16 @@
 #Greenfoot project file
+=\=\=\=\=\=\=
+<<<<<<<=Updated\ upstream
+>>>>>>>=Stashed\ changes
 class.Burger.image=hamburger.png
-<<<<<<< Updated upstream
-class.Cola.image=barrel.png
-class.Cook.image=man.png
-class.Counter.image=brick.jpg
-class.Customer.image=man01.png
-class.Fries.image=chips-1.png
-dependency1.from=Customer
-=======
 class.Cola.image=drink.png
 class.Cook.image=man.png
 class.Counter.image=brick.jpg
 class.Customer.image=man01.png
 class.Fries.image=fries.png
 class.IceCream.image=iceCream.png
-dependency1.from=MainWorld
->>>>>>> Stashed changes
-dependency1.to=Counter
+dependency1.from=Button
+dependency1.to=Label
 dependency1.type=UsesDependency
 dependency2.from=MainWorld
 dependency2.to=Counter
@@ -27,35 +21,25 @@ dependency3.type=UsesDependency
 dependency4.from=MainWorld
 dependency4.to=Customer
 dependency4.type=UsesDependency
-dependency5.from=Button
+dependency5.from=WelcomeWorld
 dependency5.to=Label
 dependency5.type=UsesDependency
 dependency6.from=WelcomeWorld
-dependency6.to=Label
+dependency6.to=Button
 dependency6.type=UsesDependency
 dependency7.from=WelcomeWorld
-dependency7.to=Button
+dependency7.to=MainWorld
 dependency7.type=UsesDependency
 dependency8.from=WelcomeWorld
 dependency8.to=MainWorld
 dependency8.type=UsesDependency
-<<<<<<< Updated upstream
-editor.fx.0.height=737
-editor.fx.0.width=814
-editor.fx.0.x=232
-editor.fx.0.y=4
-height=766
-package.numDependencies=8
-package.numTargets=14
-=======
 editor.fx.0.height=0
 editor.fx.0.width=0
 editor.fx.0.x=0
 editor.fx.0.y=0
 height=830
-package.numDependencies=8
-package.numTargets=16
->>>>>>> Stashed changes
+package.numDependencies=7
+package.numTargets=15
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
@@ -66,7 +50,7 @@ publish.title=
 publish.url=
 readme.height=60
 readme.name=@README
-readme.width=49
+readme.width=48
 readme.x=10
 readme.y=10
 simulation.speed=50
@@ -106,16 +90,14 @@ target13.width=120
 target13.x=0
 target13.y=0
 target14.height=70
-target14.name=Food
+target14.name=MyWorld
 target14.showInterface=false
 target14.type=ClassTarget
 target14.width=120
 target14.x=0
 target14.y=0
-<<<<<<< Updated upstream
-=======
 target15.height=70
-target15.name=MyWorld
+target15.name=Food
 target15.showInterface=false
 target15.type=ClassTarget
 target15.width=120
@@ -128,7 +110,6 @@ target16.type=ClassTarget
 target16.width=120
 target16.x=0
 target16.y=0
->>>>>>> Stashed changes
 target2.height=70
 target2.name=Fries
 target2.showInterface=false
@@ -185,12 +166,8 @@ target9.type=ClassTarget
 target9.width=120
 target9.x=0
 target9.y=0
-version=3.0.0
-<<<<<<< Updated upstream
-width=1294
-=======
+version=3.1.0
 width=1550
->>>>>>> Stashed changes
 world.lastInstantiated=MainWorld
 xPosition=0
 yPosition=0

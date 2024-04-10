@@ -10,6 +10,8 @@ public class Cook extends Employee
 {
     public boolean working = false;
     private int direction = 0;
+    private boolean isImageFlipped = false;
+
     
     // Kitchen boundaries
     private int minX = 50; // Minimum X-coordinate
@@ -19,23 +21,34 @@ public class Cook extends Employee
     
     public void wander() {
         // Randomly change direction
-        if (Greenfoot.getRandomNumber(100) == 101) { // 10% chance to change direction
+        if (Greenfoot.getRandomNumber(100) == 1) { // 10% chance to change direction
             direction += Greenfoot.getRandomNumber(180) - 90; // Change direction randomly by -90 to +90 degrees
             direction = (direction + 360) % 360; // Ensure the direction is within 0-359 degrees
         }
-        
-        // Move forward in the current direction
-        move(1);
         
         // Check boundaries and adjust position and direction if necessary
         if (getX() < minX || getX() > maxX || getY() < minY || getY() > maxY) {
             // Reverse direction
             direction = (direction + 180) % 360;
-            move(5); // Move back inside the boundary
+            //move(50); // Move back inside the boundary
         }
         
         // Set the actor's image rotation to match the direction of movement
         setRotation(direction);
+        
+        // Move forward in the current direction
+        move(1);
+        
+        
+        // Face either left or right (no diagonals, up/downs..)
+        if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
+            getImage().mirrorHorizontally();
+            isImageFlipped = !isImageFlipped; // Update the flipped state
+        }else {
+            setRotation(0); // Facing right
+        }
+        
+        
     }
 
     public void act()
