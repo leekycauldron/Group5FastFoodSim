@@ -8,6 +8,8 @@ import java.util.ArrayList;
  */
 public class Customer extends Actor
 {
+    GifImage customerGif = new GifImage("customerWalking.gif");
+    
     protected String[] foodItems = {"burger", "hotdog"};
     protected String[] sideItems = {"fries","cola"};
     protected ArrayList<String> order = new ArrayList<String>();
@@ -69,7 +71,8 @@ public class Customer extends Actor
     
     public void act() 
     {
-        
+        setImage(customerGif.getCurrentImage());
+        getImage().scale(50,50);
         Counter nearestCounter = findNearestActor(Counter.class);
         if (!intersects(nearestCounter)) {
             turnTowards(nearestCounter.getX(), nearestCounter.getY());
