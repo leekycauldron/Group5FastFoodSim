@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class Cook here.
@@ -50,13 +51,40 @@ public class Cook extends Employee
         
         
     }
+    
+    private Counter findOrderCounter() {
+        List<Counter> counters = getWorld().getObjects(Counter.class);
+        for (Counter counter : counters) {
+            if (counter.isOrdered()) { // Assuming 'ordered' is a public attribute
+                return counter;
+            }
+        }
+        return null; // No counter with an order found
+    }
 
     public void act()
     {
         if (working) {
             
         } else {
-            wander();
+            Counter orderCounter = findOrderCounter();
+            if (orderCounter != null) {
+                if (!intersects(orderCounter)) {
+                    // Move towards the counter with an order
+                    turnTowards(orderCounter.getX(), orderCounter.getY());
+                    move(1); // Adjust the speed as needed
+                    if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
+                        getImage().mirrorHorizontally();
+                        isImageFlipped = !isImageFlipped; // Update the flipped state
+                    }else {
+                        setRotation(0); // Facing right
+                    }
+                } else {
+                    // Take the order
+                    orderCounter.doneOrder();
+                    working = true;
+                }
+            }
         }
     }
 }
