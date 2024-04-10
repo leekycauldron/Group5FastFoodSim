@@ -69,6 +69,7 @@ public class Customer extends Actor
     
     public void act() 
     {
+        
         Counter nearestCounter = findNearestActor(Counter.class);
         if (!intersects(nearestCounter)) {
             turnTowards(nearestCounter.getX(), nearestCounter.getY());
