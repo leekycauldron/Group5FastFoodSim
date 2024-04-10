@@ -65,7 +65,7 @@ public class Cook extends Employee
     public void act()
     {
         if (working) {
-            
+            setLocation(getWorld().getWidth()/2-100,getY());
         } else {
             Counter orderCounter = findOrderCounter();
             if (orderCounter != null) {
