@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
+import java.util.List;
 /**
  * Write a description of class Customer here.
  * 
@@ -14,6 +15,8 @@ public class Customer extends Actor
     protected String[] sideItems = {"fries","cola"};
     protected ArrayList<String> order = new ArrayList<String>();
     protected boolean ordered = false;
+    private boolean isImageFlipped = false;
+    private int direction = 0;
     
     public Customer() {
         
@@ -22,7 +25,8 @@ public class Customer extends Actor
     // TODO: put this in a separate "utils" class because it is likely other classes may use the function
     // Used in a previous vehicle sim
     // Find the nearest actor given the class specification in argument (Employee.class, Actor.class, Counter.class all work)
-    protected <T extends Actor> T findNearestActor(Class<T> aClass) {
+    // Modified for counterONLY which finds the closest counter that is open
+    protected <T extends Counter> T findNearestCounter(Class<T> aClass) {
         // try catch needed for some reason as getting nearest actor if there is none returns error
         try{
             ArrayList<T> actors = (ArrayList<T>)getWorld().getObjects(aClass);
@@ -31,7 +35,7 @@ public class Customer extends Actor
     
             for (T a : actors) {
                 double distance = getDistance(getX(), getY(), a.getX(), a.getY());
-                if (distance < nearestDistance) {
+                if (distance < nearestDistance && !a.isOrdered()) {
                     nearestDistance = distance;
                     nearestActor = a;
                 }
@@ -63,7 +67,6 @@ public class Customer extends Actor
             for(int i = 0; i < sidesAmt; i++) {
                 order.add(sideItems[Greenfoot.getRandomNumber(sideItems.length)]);
             }
-            System.out.println(order);
             counter.order(order);
             ordered = true;
         }
@@ -71,15 +74,28 @@ public class Customer extends Actor
     
     public void act() 
     {
-        setImage(customerGif.getCurrentImage());
-        getImage().scale(50,50);
-        Counter nearestCounter = findNearestActor(Counter.class);
-        if (!intersects(nearestCounter)) {
-            turnTowards(nearestCounter.getX(), nearestCounter.getY());
-            move(1); // Adjust the speed as needed
-            setRotation(0); // Prevent customers from rotating as it would look weird
+        if (!ordered) {
+            getImage().scale(50,50);
+            Counter nearestCounter = findNearestCounter(Counter.class);
+            if(nearestCounter != null) {
+                setImage(customerGif.getCurrentImage());
+                getImage().scale(50,50);
+                if (!intersects(nearestCounter)) {
+                    turnTowards(nearestCounter.getX(), nearestCounter.getY());
+                    move(1); // Adjust the speed as needed
+                    // Face either left or right (no diagonals, up/downs..)
+                    if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
+                        getImage().mirrorHorizontally();
+                        isImageFlipped = !isImageFlipped; // Update the flipped state
+                    }else {
+                        setRotation(0); // Facing right
+                    }
+                } else {
+                    order(nearestCounter);
+                }
+            }
         } else {
-            order(nearestCounter);
+            setLocation(getWorld().getWidth()/2-100,getY());
         }
     }    
 }

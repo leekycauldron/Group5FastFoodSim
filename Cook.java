@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
-
+import java.util.ArrayList;
 /**
  * Write a description of class Cook here.
  * 
@@ -12,7 +12,7 @@ public class Cook extends Employee
     public boolean working = false;
     private int direction = 0;
     private boolean isImageFlipped = false;
-
+    private ArrayList<String> order = new ArrayList<String>();
     
     // Kitchen boundaries
     private int minX = 50; // Minimum X-coordinate
@@ -55,7 +55,7 @@ public class Cook extends Employee
     private Counter findOrderCounter() {
         List<Counter> counters = getWorld().getObjects(Counter.class);
         for (Counter counter : counters) {
-            if (counter.isOrdered()) { // Assuming 'ordered' is a public attribute
+            if (counter.isOrdered()) {
                 return counter;
             }
         }
