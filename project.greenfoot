@@ -1,7 +1,4 @@
 #Greenfoot project file
-=\=\=\=\=\=\=
-<<<<<<<=Updated\ upstream
->>>>>>>=Stashed\ changes
 class.Burger.image=hamburger.png
 class.Cola.image=drink.png
 class.Cook.image=man.png
@@ -9,13 +6,8 @@ class.Counter.image=brick.jpg
 class.Customer.image=man01.png
 class.Fries.image=fries.png
 class.IceCream.image=iceCream.png
-<<<<<<< Updated upstream
-dependency1.from=Button
-dependency1.to=Label
-=======
 dependency1.from=MainWorld
 dependency1.to=Counter
->>>>>>> Stashed changes
 dependency1.type=UsesDependency
 dependency2.from=MainWorld
 dependency2.to=Cook
@@ -27,15 +19,6 @@ dependency4.from=WelcomeWorld
 dependency4.to=Label
 dependency4.type=UsesDependency
 dependency5.from=WelcomeWorld
-<<<<<<< Updated upstream
-dependency5.to=Label
-dependency5.type=UsesDependency
-dependency6.from=WelcomeWorld
-dependency6.to=Button
-dependency6.type=UsesDependency
-dependency7.from=WelcomeWorld
-dependency7.to=MainWorld
-=======
 dependency5.to=Button
 dependency5.type=UsesDependency
 dependency6.from=WelcomeWorld
@@ -43,28 +26,17 @@ dependency6.to=MainWorld
 dependency6.type=UsesDependency
 dependency7.from=Customer
 dependency7.to=Counter
->>>>>>> Stashed changes
 dependency7.type=UsesDependency
 dependency8.from=Button
 dependency8.to=Label
 dependency8.type=UsesDependency
-<<<<<<< Updated upstream
 editor.fx.0.height=0
 editor.fx.0.width=0
 editor.fx.0.x=0
 editor.fx.0.y=0
-height=830
-package.numDependencies=7
-package.numTargets=15
-=======
-editor.fx.0.height=737
-editor.fx.0.width=814
-editor.fx.0.x=360
-editor.fx.0.y=26
-height=830
+height=766
 package.numDependencies=8
 package.numTargets=16
->>>>>>> Stashed changes
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
@@ -115,18 +87,14 @@ target13.width=120
 target13.x=0
 target13.y=0
 target14.height=70
-<<<<<<< Updated upstream
-target14.name=MyWorld
-=======
 target14.name=WelcomeWorld
->>>>>>> Stashed changes
 target14.showInterface=false
 target14.type=ClassTarget
 target14.width=120
 target14.x=0
 target14.y=0
 target15.height=70
-target15.name=Food
+target15.name=MyWorld
 target15.showInterface=false
 target15.type=ClassTarget
 target15.width=120
@@ -195,12 +163,8 @@ target9.type=ClassTarget
 target9.width=120
 target9.x=0
 target9.y=0
-<<<<<<< Updated upstream
 version=3.1.0
-=======
-version=3.0.0
->>>>>>> Stashed changes
-width=1550
+width=1294
 world.lastInstantiated=MainWorld
 xPosition=0
 yPosition=0
