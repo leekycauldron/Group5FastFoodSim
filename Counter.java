@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Counter extends Equipment
 {
-    private ArrayList<ArrayList<String>> orders = new ArrayList<>();
+    private ArrayList<String> order = new ArrayList<>();
     private boolean ordered = false;
     public Counter(){
         GreenfootImage i = getImage();
@@ -17,11 +17,12 @@ public class Counter extends Equipment
     }
     public void order(ArrayList<String> order) {
         // Take order and save it to this counter
-        orders.add(order);
+        this.order = order;
         ordered = true;
     }
-    public void doneOrder() {
+    public ArrayList<String> doneOrder() {
         ordered = false;
+        return order;
     }
     public boolean isOrdered() {
         return ordered;
