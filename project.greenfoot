@@ -9,19 +9,25 @@ class.Counter.image=brick.jpg
 class.Customer.image=man01.png
 class.Fries.image=fries.png
 class.IceCream.image=iceCream.png
+<<<<<<< Updated upstream
 dependency1.from=Button
 dependency1.to=Label
+=======
+dependency1.from=MainWorld
+dependency1.to=Counter
+>>>>>>> Stashed changes
 dependency1.type=UsesDependency
 dependency2.from=MainWorld
-dependency2.to=Counter
+dependency2.to=Cook
 dependency2.type=UsesDependency
 dependency3.from=MainWorld
-dependency3.to=Cook
+dependency3.to=Customer
 dependency3.type=UsesDependency
-dependency4.from=MainWorld
-dependency4.to=Customer
+dependency4.from=WelcomeWorld
+dependency4.to=Label
 dependency4.type=UsesDependency
 dependency5.from=WelcomeWorld
+<<<<<<< Updated upstream
 dependency5.to=Label
 dependency5.type=UsesDependency
 dependency6.from=WelcomeWorld
@@ -29,10 +35,20 @@ dependency6.to=Button
 dependency6.type=UsesDependency
 dependency7.from=WelcomeWorld
 dependency7.to=MainWorld
+=======
+dependency5.to=Button
+dependency5.type=UsesDependency
+dependency6.from=WelcomeWorld
+dependency6.to=MainWorld
+dependency6.type=UsesDependency
+dependency7.from=Customer
+dependency7.to=Counter
+>>>>>>> Stashed changes
 dependency7.type=UsesDependency
-dependency8.from=WelcomeWorld
-dependency8.to=MainWorld
+dependency8.from=Button
+dependency8.to=Label
 dependency8.type=UsesDependency
+<<<<<<< Updated upstream
 editor.fx.0.height=0
 editor.fx.0.width=0
 editor.fx.0.x=0
@@ -40,6 +56,15 @@ editor.fx.0.y=0
 height=830
 package.numDependencies=7
 package.numTargets=15
+=======
+editor.fx.0.height=737
+editor.fx.0.width=814
+editor.fx.0.x=360
+editor.fx.0.y=26
+height=830
+package.numDependencies=8
+package.numTargets=16
+>>>>>>> Stashed changes
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
@@ -62,35 +87,39 @@ target1.width=120
 target1.x=0
 target1.y=0
 target10.height=70
-target10.name=Equipment
+target10.name=Employee
 target10.showInterface=false
 target10.type=ClassTarget
 target10.width=120
 target10.x=0
 target10.y=0
 target11.height=70
-target11.name=Button
+target11.name=Equipment
 target11.showInterface=false
 target11.type=ClassTarget
 target11.width=120
 target11.x=0
 target11.y=0
 target12.height=70
-target12.name=EndWorld
+target12.name=Button
 target12.showInterface=false
 target12.type=ClassTarget
 target12.width=120
 target12.x=0
 target12.y=0
 target13.height=70
-target13.name=WelcomeWorld
+target13.name=EndWorld
 target13.showInterface=false
 target13.type=ClassTarget
 target13.width=120
 target13.x=0
 target13.y=0
 target14.height=70
+<<<<<<< Updated upstream
 target14.name=MyWorld
+=======
+target14.name=WelcomeWorld
+>>>>>>> Stashed changes
 target14.showInterface=false
 target14.type=ClassTarget
 target14.width=120
@@ -139,34 +168,38 @@ target5.width=120
 target5.x=0
 target5.y=0
 target6.height=70
-target6.name=Burger
+target6.name=IceCream
 target6.showInterface=false
 target6.type=ClassTarget
 target6.width=120
 target6.x=0
 target6.y=0
 target7.height=70
-target7.name=MainWorld
+target7.name=Burger
 target7.showInterface=false
 target7.type=ClassTarget
 target7.width=120
 target7.x=0
 target7.y=0
 target8.height=70
-target8.name=Counter
+target8.name=MainWorld
 target8.showInterface=false
 target8.type=ClassTarget
 target8.width=120
 target8.x=0
 target8.y=0
 target9.height=70
-target9.name=Employee
+target9.name=Counter
 target9.showInterface=false
 target9.type=ClassTarget
 target9.width=120
 target9.x=0
 target9.y=0
+<<<<<<< Updated upstream
 version=3.1.0
+=======
+version=3.0.0
+>>>>>>> Stashed changes
 width=1550
 world.lastInstantiated=MainWorld
 xPosition=0
