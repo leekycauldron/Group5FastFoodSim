@@ -35,7 +35,7 @@ public class MainWorld extends World
         // Spawn all equipment and employees based on the counts
         for(int i = 0; i < COUNTER_COUNT;i++) {
             Counter counter = new Counter();
-            addObject(counter, (getWidth()/2)+60*i,getHeight()/2);
+            addObject(counter, (getWidth()/2)+45*i,getHeight()/2);
         }
         for(int i = 0; i < COOK_COUNT; i++) {
             Cook cook = new Cook();
