@@ -12,6 +12,15 @@ public class Equipment extends Actor
      * Act - do whatever the Equipment wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    private boolean inUse = false;
+    
+    
+    public boolean isInUse() {
+        return inUse;
+    }
+    public void use() {
+        inUse = true;
+    }
     public void act() 
     {
         // Add your action code here.

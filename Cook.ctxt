@@ -2,9 +2,11 @@
 comment0.target=Cook
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Cook\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
-comment1.target=void\ wander()
+comment1.target=Grill\ findGrill()
 comment2.params=
-comment2.target=Counter\ findOrderCounter()
+comment2.target=void\ goToGrill()
 comment3.params=
-comment3.target=void\ act()
-numComments=4
+comment3.target=Counter\ findOrderCounter()
+comment4.params=
+comment4.target=void\ act()
+numComments=5
