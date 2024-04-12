@@ -18,11 +18,18 @@ public class Cook extends Employee
     private ArrayList<String> order = new ArrayList<String>();
     private boolean addedMoney = false; // Only add money once per item!
     
+<<<<<<< Updated upstream
     // Kitchen boundaries
     private int minX = 50; // Minimum X-coordinate
     private int maxX = 550; // Maximum X-coordinate
     private int minY = 50; // Minimum Y-coordinate
     private int maxY = 250; // Maximum Y-coordinate
+=======
+    public Cook(){
+        setImage(cookGif.getCurrentImage());
+        getImage().scale(33, 53);
+    }
+>>>>>>> Stashed changes
     
     private Grill findGrill() {
         List<Grill> grills = getWorld().getObjects(Grill.class);
@@ -128,7 +135,7 @@ public class Cook extends Employee
                     turnTowards(orderCounter.getX(), orderCounter.getY());
                     move(1); // Adjust the speed as needed
                     setImage(cookGif.getCurrentImage());
-                    getImage().scale(100, 100);
+                    getImage().scale(33, 53);
                     if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
                         getImage().mirrorHorizontally();
                         isImageFlipped = !isImageFlipped; // Update the flipped state

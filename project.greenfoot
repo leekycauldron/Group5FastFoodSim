@@ -1,7 +1,7 @@
 #Greenfoot project file
 class.Burger.image=hamburger.png
 class.Cola.image=barrel.png
-class.Cook.image=cook.gif
+class.Cook.image=chef.gif
 class.Counter.image=counter.png
 class.Customer.image=customerWalking.gif
 class.Fountain.image=fountain.png
@@ -59,8 +59,13 @@ editor.fx.0.width=814
 editor.fx.0.x=360
 editor.fx.0.y=26
 height=830
+<<<<<<< Updated upstream
 package.numDependencies=15
 package.numTargets=20
+=======
+package.numDependencies=17
+package.numTargets=21
+>>>>>>> Stashed changes
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true

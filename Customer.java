@@ -75,11 +75,11 @@ public class Customer extends Actor
     public void act() 
     {
         if (!ordered) {
-            getImage().scale(50,50);
+            getImage().scale(34,46);
             Counter nearestCounter = findNearestCounter(Counter.class);
             if(nearestCounter != null) {
                 setImage(customerGif.getCurrentImage());
-                getImage().scale(50,50);
+                getImage().scale(34,46);
                 if (!intersects(nearestCounter)) {
                     turnTowards(nearestCounter.getX(), nearestCounter.getY());
                     move(1); // Adjust the speed as needed
