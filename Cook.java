@@ -9,6 +9,8 @@ import java.util.ArrayList;
  */
 public class Cook extends Employee
 {
+    GifImage cookGif = new GifImage("cook.gif");
+    
     private boolean working = false; // when received order but may necessarily be at equipment
     private boolean cooking = false; // when using cooking equipment
     private int direction = 0;
@@ -125,6 +127,8 @@ public class Cook extends Employee
                     // Move towards the counter with an order
                     turnTowards(orderCounter.getX(), orderCounter.getY());
                     move(1); // Adjust the speed as needed
+                    setImage(cookGif.getCurrentImage());
+                    getImage().scale(100, 100);
                     if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
                         getImage().mirrorHorizontally();
                         isImageFlipped = !isImageFlipped; // Update the flipped state
