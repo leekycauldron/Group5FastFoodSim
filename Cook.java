@@ -18,11 +18,6 @@ public class Cook extends Employee
     private ArrayList<String> order = new ArrayList<String>();
     private boolean addedMoney = false; // Only add money once per item!
     
-    // Kitchen boundaries
-    private int minX = 50; // Minimum X-coordinate
-    private int maxX = 550; // Maximum X-coordinate
-    private int minY = 50; // Minimum Y-coordinate
-    private int maxY = 250; // Maximum Y-coordinate
     
     private Grill findGrill() {
         List<Grill> grills = getWorld().getObjects(Grill.class);
@@ -51,7 +46,7 @@ public class Cook extends Employee
                     }
                 } else {
                     // Grill!
-                    grill.use();
+                    grill.use(this);
                     cooking = true;
                     System.out.println("grilling");
                 }
@@ -68,6 +63,11 @@ public class Cook extends Employee
             }
         }
         return null; // No counter with an order found
+    }
+    
+    public void doneCook() {
+        cooking = false;
+        order.remove(0);
     }
 
     public void act()
@@ -101,24 +101,30 @@ public class Cook extends Employee
             }
             
             if(!cooking) {
-                for(String item : order) {
-                    switch(item) {
-                        case "burger":
-                            goToGrill();
-                            break;
-                        case "hotdog":
-                            goToGrill();
-                            break;
-                        case "fries":
-                            goToGrill(); // temporary
-                            break;
-                        case "cola":
-                            goToGrill(); // temporary
-                            break;
-                        default:
-                            System.out.println("err");
-                    }
+                if (order.size() <= 0) {
+                    // done order move to spawn for now
+                    setLocation(0,0);
+                    return;
                 }
+                switch(order.get(0)) {
+                    case "burger":
+                        goToGrill();
+                        break;
+                    case "hotdog":
+                        goToGrill();
+                        break;
+                    case "fries":
+                        goToGrill(); // temporary
+                        break;
+                    case "cola":
+                        goToGrill(); // temporary
+                        break;
+                    default:
+                        System.out.println("err");
+                }
+                
+            } else {
+                // Cooking animation here
             }
         } else {
             Counter orderCounter = findOrderCounter();

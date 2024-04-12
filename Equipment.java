@@ -13,16 +13,25 @@ public class Equipment extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private boolean inUse = false;
-    
+    private int useTime = 3; // In Seconds.
+    SimpleTimer useTimer = new SimpleTimer();
+    private Cook cook; // Current cook using equipment.
     
     public boolean isInUse() {
         return inUse;
     }
-    public void use() {
+    public void use(Cook cook) {
         inUse = true;
+        useTimer.mark();
+        this.cook = cook;
     }
     public void act() 
     {
-        // Add your action code here.
+        
+        if(inUse && useTimer.millisElapsed() >= useTime * 1000) {
+            inUse = false;
+            cook.doneCook();
+            // make cook stop cooking
+        } 
     }    
 }
