@@ -13,13 +13,9 @@ public class Grill extends Equipment
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
+    
     public Grill(){
         GreenfootImage g = getImage();
-        g.scale(75, 75);
-    }
-    
-    public void act()
-    {
-        // Add your action code here.
+        g.scale(50, 50);
     }
 }
