@@ -57,7 +57,7 @@ public class MainWorld extends World
         moneyLabel = new Label("$" + money,40);
         addObject(moneyLabel, 50, 50);
         
-        if (Greenfoot.getRandomNumber (60) == 0){
+        if (Greenfoot.getRandomNumber (120) == 0){
             Customer c = new Customer();
             addObject(c,getWidth()/2+Greenfoot.getRandomNumber(getWidth()/2),getHeight()/2+getHeight()/4);
         }
