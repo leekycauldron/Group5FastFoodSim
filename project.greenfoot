@@ -1,7 +1,7 @@
 #Greenfoot project file
 class.Burger.image=hamburger.png
 class.Cola.image=barrel.png
-class.Cook.image=cook.gif
+class.Cook.image=chef.gif
 class.Counter.image=counter.png
 class.Customer.image=customerWalking.gif
 class.Fountain.image=fountain.png

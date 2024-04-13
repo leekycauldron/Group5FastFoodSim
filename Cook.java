@@ -18,7 +18,12 @@ public class Cook extends Employee
     private ArrayList<String> order = new ArrayList<String>();
     private boolean addedMoney = false; // Only add money once per item!
     
-    
+
+    public Cook(){
+        setImage(cookGif.getCurrentImage());
+        getImage().scale(33, 53);
+    }
+
     private Grill findGrill() {
         List<Grill> grills = getWorld().getObjects(Grill.class);
         for (Grill grill : grills) {
@@ -134,7 +139,7 @@ public class Cook extends Employee
                     turnTowards(orderCounter.getX(), orderCounter.getY());
                     move(1); // Adjust the speed as needed
                     setImage(cookGif.getCurrentImage());
-                    getImage().scale(100, 100);
+                    getImage().scale(33, 53);
                     if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
                         getImage().mirrorHorizontally();
                         isImageFlipped = !isImageFlipped; // Update the flipped state
