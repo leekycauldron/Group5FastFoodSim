@@ -107,8 +107,9 @@ public class Cook extends Employee
             
             if(!cooking) {
                 if (order.size() <= 0) {
-                    // done order move to spawn for now
-                    setLocation(0,0);
+                    // done order, set workin to false.
+                    working = false;
+                    addedMoney = false;
                     return;
                 }
                 switch(order.get(0)) {
