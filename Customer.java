@@ -17,10 +17,14 @@ public class Customer extends Actor
     protected boolean ordered = false;
     private boolean isImageFlipped = false;
     private int direction = 0;
+    private boolean inPickupLine = false;
+    private boolean exit = false;
     
     public Customer() {
         
     }
+    
+    
     
     // TODO: put this in a separate "utils" class because it is likely other classes may use the function
     // Used in a previous vehicle sim
@@ -48,6 +52,15 @@ public class Customer extends Actor
         
     }
     
+    // Get instance of pickup counter so customers can use it.
+    private Pickup getPickup() {
+        return getWorld().getObjects(Pickup.class).get(0);
+    }
+    
+    private Exit getExit() {
+        return getWorld().getObjects(Exit.class).get(0);
+    }
+    
     // Used in a previous vehicle sim
     // Get distance between two points using simple pythagorean theorem math
     protected double getDistance(int x1, int y1, int x2, int y2) {
@@ -67,9 +80,13 @@ public class Customer extends Actor
             for(int i = 0; i < sidesAmt; i++) {
                 order.add(sideItems[Greenfoot.getRandomNumber(sideItems.length)]);
             }
-            counter.order(order);
+            counter.order(order,this);
             ordered = true;
         }
+    }
+    
+    public void getOrder() {
+        exit = true;
     }
     
     public void act() 
@@ -83,19 +100,38 @@ public class Customer extends Actor
                 if (!intersects(nearestCounter)) {
                     turnTowards(nearestCounter.getX(), nearestCounter.getY());
                     move(1); // Adjust the speed as needed
-                    // Face either left or right (no diagonals, up/downs..)
-                    if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
-                        getImage().mirrorHorizontally();
-                        isImageFlipped = !isImageFlipped; // Update the flipped state
-                    }else {
-                        setRotation(0); // Facing right
-                    }
                 } else {
                     order(nearestCounter);
                 }
             }
-        } else {
-            setLocation(getWorld().getWidth()/2-100,getY());
+        } else { //ordered
+            //walk to x coord of pickup counter
+            
+            if(getX()>getPickup().getX()) {
+                turnTowards(getPickup().getX(),getPickup().getY()+25);
+                move(1);
+                setImage(customerGif.getCurrentImage());
+                getImage().scale(34,46);
+            } else {
+                // move down if customers in line and add to line count
+                if(!inPickupLine) {
+                    setLocation(getX(),getPickup().getY()+25+5*getPickup().getLineCount());
+                    getPickup().addLineCount();
+                    inPickupLine = true;
+                }
+            }
+            
+        }
+        if(exit) {
+            if(!intersects(getExit())) {
+                turnTowards(getExit().getX(),getExit().getY());
+                move(1);
+                setImage(customerGif.getCurrentImage());
+                getImage().scale(34,46);
+            }  else  {
+                getPickup().subLineCount();
+                getWorld().removeObject(this);
+            }
         }
     }    
 }

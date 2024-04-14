@@ -16,6 +16,7 @@ public class Cook extends Employee
     private int direction = 0;
     private boolean isImageFlipped = false;
     private ArrayList<String> order = new ArrayList<String>();
+    private Customer currentCustomer;
     private boolean addedMoney = false; // Only add money once per item!
     
 
@@ -107,9 +108,10 @@ public class Cook extends Employee
             
             if(!cooking) {
                 if (order.size() <= 0) {
-                    // done order, set workin to false.
+                    // done order, set working to false.
                     working = false;
                     addedMoney = false;
+                    currentCustomer.getOrder(); // give customer their order
                     return;
                 }
                 switch(order.get(0)) {
@@ -149,6 +151,7 @@ public class Cook extends Employee
                     }
                 } else {
                     // Take the order
+                    currentCustomer = orderCounter.getCustomer();
                     order = orderCounter.doneOrder();
                     working = true;
                 }

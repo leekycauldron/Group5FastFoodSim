@@ -45,6 +45,10 @@ public class MainWorld extends World
             Grill grill = new Grill();
             addObject(grill,(getWidth()/2)+70*i,getHeight()/2-150);
         }
+        Pickup pickup = new Pickup();
+        addObject(pickup, (getWidth()/2)-70,getHeight()/2);
+        Exit exit = new Exit();
+        addObject(exit,getWidth()/4 ,getHeight());
     }
     
     public void addMoney(int amt) {
