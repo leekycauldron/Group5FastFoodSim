@@ -19,6 +19,7 @@ public class Customer extends Actor
     private int direction = 0;
     private boolean inPickupLine = false;
     private boolean exit = false;
+    private boolean fullLeaveDecided = false; // if counters full, only decide to leave ONCE
     
     public Customer() {
         
@@ -91,37 +92,6 @@ public class Customer extends Actor
     
     public void act() 
     {
-        if (!ordered) {
-            getImage().scale(34,46);
-            Counter nearestCounter = findNearestCounter(Counter.class);
-            if(nearestCounter != null) {
-                setImage(customerGif.getCurrentImage());
-                getImage().scale(34,46);
-                if (!intersects(nearestCounter)) {
-                    turnTowards(nearestCounter.getX(), nearestCounter.getY());
-                    move(1); // Adjust the speed as needed
-                } else {
-                    order(nearestCounter);
-                }
-            }
-        } else { //ordered
-            //walk to x coord of pickup counter
-            
-            if(getX()>getPickup().getX()) {
-                turnTowards(getPickup().getX(),getPickup().getY()+25);
-                move(1);
-                setImage(customerGif.getCurrentImage());
-                getImage().scale(34,46);
-            } else {
-                // move down if customers in line and add to line count
-                if(!inPickupLine) {
-                    setLocation(getX(),getPickup().getY()+25+5*getPickup().getLineCount());
-                    getPickup().addLineCount();
-                    inPickupLine = true;
-                }
-            }
-            
-        }
         if(exit) {
             if(!intersects(getExit())) {
                 turnTowards(getExit().getX(),getExit().getY());
@@ -132,6 +102,47 @@ public class Customer extends Actor
                 getPickup().subLineCount();
                 getWorld().removeObject(this);
             }
+        } else {
+            if (!ordered) {
+                getImage().scale(34,46);
+                Counter nearestCounter = findNearestCounter(Counter.class);
+                if(nearestCounter != null) {
+                    setImage(customerGif.getCurrentImage());
+                    getImage().scale(34,46);
+                    if (!intersects(nearestCounter)) {
+                        turnTowards(nearestCounter.getX(), nearestCounter.getY());
+                        move(1); // Adjust the speed as needed
+                    } else {
+                        order(nearestCounter);
+                    }
+                } else {
+                    // Chance to leave if counter is full
+                    if(!fullLeaveDecided) {
+                        fullLeaveDecided = true;
+                        if(Greenfoot.getRandomNumber(10) == 1) {
+                            exit = true;
+                        }
+                    }
+                }
+            } else { //ordered
+                //walk to x coord of pickup counter
+                
+                if(getX()>getPickup().getX()) {
+                    turnTowards(getPickup().getX(),getPickup().getY()+25);
+                    move(1);
+                    setImage(customerGif.getCurrentImage());
+                    getImage().scale(34,46);
+                } else {
+                    // move down if customers in line and add to line count
+                    if(!inPickupLine) {
+                        setLocation(getX(),getPickup().getY()+25+5*getPickup().getLineCount());
+                        getPickup().addLineCount();
+                        inPickupLine = true;
+                    }
+                }
+                
+            }
         }
+        
     }    
 }

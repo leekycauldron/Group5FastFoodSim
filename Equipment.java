@@ -13,7 +13,7 @@ public class Equipment extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private boolean inUse = false;
-    private int useTime = 3; // In Seconds.
+    private int useTime = 1; // In Seconds.
     SimpleTimer useTimer = new SimpleTimer();
     private Cook cook; // Current cook using equipment.
     

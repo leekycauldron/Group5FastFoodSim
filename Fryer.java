@@ -15,6 +15,6 @@ public class Fryer extends Equipment
     
     public Fryer(){
         GreenfootImage f = getImage();
-        f.scale(75, 75);
+        f.scale(60, 60);
     }
 }

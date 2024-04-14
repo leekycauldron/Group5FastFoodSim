@@ -13,6 +13,7 @@ public class MainWorld extends World
     public static final int COOK_COUNT = 3;
     public static final int COUNTER_COUNT = 5;
     public static final int GRILL_COUNT = 3;
+    public static final int FRYER_COUNT = 2;
     // Prices
     public static final int BURGER_PRICE = 5;
     public static final int FRIES_PRICE = 2;
@@ -35,7 +36,7 @@ public class MainWorld extends World
         // Spawn all equipment and employees based on the counts
         for(int i = 0; i < COUNTER_COUNT;i++) {
             Counter counter = new Counter();
-            addObject(counter, (getWidth()/2)+45*i,getHeight()/2);
+            addObject(counter, (getWidth()/2)+30+50*i,getHeight()/2);
         }
         for(int i = 0; i < COOK_COUNT; i++) {
             Cook cook = new Cook();
@@ -43,7 +44,11 @@ public class MainWorld extends World
         }
         for(int i = 0; i < GRILL_COUNT; i++) {
             Grill grill = new Grill();
-            addObject(grill,(getWidth()/2)+70*i,getHeight()/2-150);
+            addObject(grill,(getWidth()/2)+60*i,getHeight()/2-150);
+        }
+        for(int i = 0; i < FRYER_COUNT; i++) {
+            Fryer fryer = new Fryer();
+            addObject(fryer,getWidth()-50,50+50*i);
         }
         Pickup pickup = new Pickup();
         addObject(pickup, (getWidth()/2)-70,getHeight()/2);
@@ -61,7 +66,7 @@ public class MainWorld extends World
         moneyLabel = new Label("$" + money,40);
         addObject(moneyLabel, 50, 50);
         
-        if (Greenfoot.getRandomNumber (120) == 0){
+        if (Greenfoot.getRandomNumber (300) == 0){
             Customer c = new Customer();
             addObject(c,getWidth()/2+Greenfoot.getRandomNumber(getWidth()/2),getHeight()/2+getHeight()/4);
         }

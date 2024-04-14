@@ -18,7 +18,7 @@ public class Cook extends Employee
     private ArrayList<String> order = new ArrayList<String>();
     private Customer currentCustomer;
     private boolean addedMoney = false; // Only add money once per item!
-    
+    private boolean gotOrder = false; // If cook is done order and they need to give to customer.
 
     public Cook(){
         setImage(cookGif.getCurrentImage());
@@ -35,12 +35,22 @@ public class Cook extends Employee
         return null; // No free grill found
     }
     
+    private Fryer findFryer() {
+        List<Fryer> fryers = getWorld().getObjects(Fryer.class);
+        for (Fryer fryer : fryers) {
+            if (!fryer.isInUse()) {
+                return fryer;
+            }
+        }
+        return null; // No free grill found
+    }
+    
+    
+    
     private void goToGrill() {
-        System.out.println("finding grill");
         Grill grill = findGrill();
         if (grill != null) {
                 if (!intersects(grill)) {
-                    System.out.println("moving to grill");
                     // Move towards the counter with an order
                     turnTowards(grill.getX(), grill.getY());
                     move(1); // Adjust the speed as needed
@@ -54,11 +64,30 @@ public class Cook extends Employee
                     // Grill!
                     grill.use(this);
                     cooking = true;
-                    System.out.println("grilling");
                 }
-        } else {
-            System.out.println("no grill");
-        }
+        } 
+    }
+    
+    
+    private void goToFryer() {
+        Fryer fryer = findFryer();
+        if (fryer != null) {
+                if (!intersects(fryer)) {
+                    // Move towards the counter with an order
+                    turnTowards(fryer.getX(), fryer.getY());
+                    move(1); // Adjust the speed as needed
+                    if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
+                        getImage().mirrorHorizontally();
+                        isImageFlipped = !isImageFlipped; // Update the flipped state
+                    }else {
+                        setRotation(0); // Facing right
+                    }
+                } else {
+                    // Fry!
+                    fryer.use(this);
+                    cooking = true;
+                }
+        } 
     }
     
     private Counter findOrderCounter() {
@@ -70,6 +99,7 @@ public class Cook extends Employee
         }
         return null; // No counter with an order found
     }
+
     
     public void doneCook() {
         cooking = false;
@@ -80,8 +110,8 @@ public class Cook extends Employee
     {
         MainWorld world = (MainWorld) getWorld();
         if (working) {
-            for(String item : order) {
-                if(!addedMoney) {
+            if(!addedMoney) {
+                for(String item : order) {
                     addedMoney = true;
                     switch(item) {
                         case "burger":
@@ -94,45 +124,58 @@ public class Cook extends Employee
                             break;
                         case "fries":
                             world.addMoney(world.FRIES_PRICE);
-                            goToGrill(); // temporary
+                            goToFryer(); // temporary
                             break;
                         case "cola":
                             world.addMoney(world.COLA_PRICE);
                             goToGrill(); // temporary
                             break;
                         default:
-                            System.out.println("err");
+                            break;
                     }
                 }
             }
             
-            if(!cooking) {
-                if (order.size() <= 0) {
-                    // done order, set working to false.
+            if(gotOrder) {
+                Pickup p = getWorld().getObjects(Pickup.class).get(0);
+                if(!intersects(p)){
+                    turnTowards(p.getX(),p.getY());
+                    move(1);
+                } else {
+                    gotOrder = false;
                     working = false;
                     addedMoney = false;
                     currentCustomer.getOrder(); // give customer their order
                     return;
                 }
-                switch(order.get(0)) {
-                    case "burger":
-                        goToGrill();
-                        break;
-                    case "hotdog":
-                        goToGrill();
-                        break;
-                    case "fries":
-                        goToGrill(); // temporary
-                        break;
-                    case "cola":
-                        goToGrill(); // temporary
-                        break;
-                    default:
-                        System.out.println("err");
+            }
+            else {
+                if(!cooking) {
+                    if (order.size() <= 0) {
+                        // done order, set working to false
+                        gotOrder = true;
+                        return;
+                    }
+                    switch(order.get(0)) {
+                        case "burger":
+                            goToGrill();
+                            break;
+                        case "hotdog":
+                            goToGrill();
+                            break;
+                        case "fries":
+                            goToFryer(); // temporary
+                            break;
+                        case "cola":
+                            goToGrill(); // temporary
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                } else {
+                    // Cooking animation here
                 }
-                
-            } else {
-                // Cooking animation here
             }
         } else {
             Counter orderCounter = findOrderCounter();
