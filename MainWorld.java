@@ -45,6 +45,10 @@ public class MainWorld extends World
             Grill grill = new Grill();
             addObject(grill,(getWidth()/2)+70*i,getHeight()/2-150);
         }
+        Pickup pickup = new Pickup();
+        addObject(pickup, (getWidth()/2)-70,getHeight()/2);
+        Exit exit = new Exit();
+        addObject(exit,getWidth()/4 ,getHeight());
     }
     
     public void addMoney(int amt) {
@@ -57,7 +61,7 @@ public class MainWorld extends World
         moneyLabel = new Label("$" + money,40);
         addObject(moneyLabel, 50, 50);
         
-        if (Greenfoot.getRandomNumber (60) == 0){
+        if (Greenfoot.getRandomNumber (120) == 0){
             Customer c = new Customer();
             addObject(c,getWidth()/2+Greenfoot.getRandomNumber(getWidth()/2),getHeight()/2+getHeight()/4);
         }

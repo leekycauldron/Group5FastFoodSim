@@ -8,14 +8,9 @@ comment2.target=Grill\ findGrill()
 comment3.params=
 comment3.target=void\ goToGrill()
 comment4.params=
-<<<<<<< Updated upstream
-comment4.target=void\ act()
-numComments=5
-=======
 comment4.target=Counter\ findOrderCounter()
 comment5.params=
 comment5.target=void\ doneCook()
 comment6.params=
 comment6.target=void\ act()
 numComments=7
->>>>>>> Stashed changes
