@@ -9,6 +9,10 @@ class.Fries.image=chips-1.png
 class.Fryer.image=fryer.png
 class.Grill.image=grill.png
 class.MainWorld.image=floorTile.png
+<<<<<<< Updated upstream
+=======
+class.Pickup.image=pickUpCounter.png
+>>>>>>> Stashed changes
 dependency1.from=MainWorld
 dependency1.to=Label
 dependency1.type=UsesDependency
@@ -54,6 +58,7 @@ dependency8.type=UsesDependency
 dependency9.from=Customer
 dependency9.to=GifImage
 dependency9.type=UsesDependency
+<<<<<<< Updated upstream
 editor.fx.0.height=737
 editor.fx.0.width=814
 editor.fx.0.x=360
@@ -65,6 +70,15 @@ package.numTargets=20
 =======
 package.numDependencies=17
 package.numTargets=21
+>>>>>>> Stashed changes
+=======
+editor.fx.0.height=0
+editor.fx.0.width=0
+editor.fx.0.x=0
+editor.fx.0.y=0
+height=830
+package.numDependencies=23
+package.numTargets=24
 >>>>>>> Stashed changes
 project.charset=windows-1252
 publish.hasSource=false
@@ -95,14 +109,22 @@ target10.width=120
 target10.x=0
 target10.y=0
 target11.height=70
+<<<<<<< Updated upstream
 target11.name=GifImage
+=======
+target11.name=Exit
+>>>>>>> Stashed changes
 target11.showInterface=false
 target11.type=ClassTarget
 target11.width=120
 target11.x=0
 target11.y=0
 target12.height=70
+<<<<<<< Updated upstream
 target12.name=MainWorld
+=======
+target12.name=Food
+>>>>>>> Stashed changes
 target12.showInterface=false
 target12.type=ClassTarget
 target12.width=120
