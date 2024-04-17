@@ -14,6 +14,9 @@ public class MainWorld extends World
     public static final int COUNTER_COUNT = 5;
     public static final int GRILL_COUNT = 3;
     public static final int FRYER_COUNT = 2;
+    // Staff Wages
+    public static final int COOK_WAGE = 2;
+    
     // Prices
     public static final int BURGER_PRICE = 5;
     public static final int FRIES_PRICE = 2;
@@ -22,12 +25,13 @@ public class MainWorld extends World
     
     
     public int money = 50;
+    public int time = 9;
     Label moneyLabel = new Label("$" + money,40);
+    Label timeLabel = new Label(time+":00",40);
+    SimpleTimer wageTimer = new SimpleTimer(); // Keep track of when to pay wages.
+    SimpleTimer utilTimer = new SimpleTimer(); // Keep track of when to pay utilities.
+    SimpleTimer timer = new SimpleTimer(); // Keep track of the day time
     
-    /**
-     * Constructor for objects of class MainWorld.
-     * 
-     */
     public MainWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -54,10 +58,45 @@ public class MainWorld extends World
         addObject(pickup, (getWidth()/2)-70,getHeight()/2);
         Exit exit = new Exit();
         addObject(exit,getWidth()/4 ,getHeight());
+        
+        timeLabel = new Label(time+":00 AM",40);
+        addObject(timeLabel, 80, 80);
     }
     
     public void addMoney(int amt) {
         this.money += amt;
+    }
+    
+    
+    // Handle all the timer events
+    public void timerCheck() {
+        if(wageTimer.millisElapsed() > 5000) {
+            wageTimer.mark();
+            // Employee Wages
+            money -= COOK_COUNT * COOK_WAGE;
+        }
+        if (utilTimer.millisElapsed() > 10000) {
+            utilTimer.mark();
+            // Utilities (depends on equipment count)
+            money -= 1*COUNTER_COUNT - 3*GRILL_COUNT - 2*FRYER_COUNT;
+        }
+        if (timer.millisElapsed() > 10000) {
+            timer.mark();
+            time++;
+            if(time < 13) {
+                removeObject(timeLabel);
+                timeLabel = new Label(time+":00 AM",40);
+                addObject(timeLabel, 80, 80);
+            } else {
+                removeObject(timeLabel);
+                timeLabel = new Label((time-12)+":00 PM",40);
+                addObject(timeLabel, 80, 80);
+            }
+            if (time == 17) {
+                EndWorld end = new EndWorld();
+                
+            }
+        }
     }
     
     public void act() {
@@ -66,9 +105,12 @@ public class MainWorld extends World
         moneyLabel = new Label("$" + money,40);
         addObject(moneyLabel, 50, 50);
         
-        if (Greenfoot.getRandomNumber (300) == 0){
+        if (Greenfoot.getRandomNumber (500) == 0){
             Customer c = new Customer();
             addObject(c,getWidth()/2+Greenfoot.getRandomNumber(getWidth()/2),getHeight()/2+getHeight()/4);
         }
+        
+        
+        timerCheck();
     }
 }
