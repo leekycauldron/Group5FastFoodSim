@@ -10,12 +10,12 @@ public class MainWorld extends World
 {
     // THESE FINAL VARIABLES ARE HARDCODED FOR NOW (TODO: add values from title screen)
     // Staff + Equipment Count
-    public static final int COOK_COUNT = 3;
-    public static final int COUNTER_COUNT = 5;
-    public static final int GRILL_COUNT = 3;
-    public static final int FRYER_COUNT = 2;
+    public static int COOK_COUNT;
+    public static int COUNTER_COUNT;
+    public static int GRILL_COUNT;
+    public static int FRYER_COUNT;
     // Staff Wages
-    public static final int COOK_WAGE = 2;
+    public static final int COOK_WAGE = 8;
     
     // Prices
     public static final int BURGER_PRICE = 5;
@@ -32,10 +32,19 @@ public class MainWorld extends World
     SimpleTimer utilTimer = new SimpleTimer(); // Keep track of when to pay utilities.
     SimpleTimer timer = new SimpleTimer(); // Keep track of the day time
     
-    public MainWorld()
+    public MainWorld(int COOK_COUNT, int COUNTER_COUNT, int GRILL_COUNT, int FRYER_COUNT)
     {    
+        
+        
+        
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        
+        this.COOK_COUNT = COOK_COUNT;
+        this.COUNTER_COUNT = COUNTER_COUNT;
+        this.GRILL_COUNT = GRILL_COUNT;
+        this.FRYER_COUNT = FRYER_COUNT;
+        
         addObject(moneyLabel, 50, 50);
         // Spawn all equipment and employees based on the counts
         for(int i = 0; i < COUNTER_COUNT;i++) {
@@ -70,12 +79,12 @@ public class MainWorld extends World
     
     // Handle all the timer events
     public void timerCheck() {
-        if(wageTimer.millisElapsed() > 5000) {
+        if(wageTimer.millisElapsed() > 10000) {
             wageTimer.mark();
             // Employee Wages
             money -= COOK_COUNT * COOK_WAGE;
         }
-        if (utilTimer.millisElapsed() > 10000) {
+        if (utilTimer.millisElapsed() > 5000) {
             utilTimer.mark();
             // Utilities (depends on equipment count)
             money -= 1*COUNTER_COUNT - 3*GRILL_COUNT - 2*FRYER_COUNT;
@@ -93,18 +102,25 @@ public class MainWorld extends World
                 addObject(timeLabel, 80, 80);
             }
             if (time == 17) {
-                EndWorld end = new EndWorld();
-                
+                EndWorld end = new EndWorld(money);
+                Greenfoot.setWorld(end);
             }
         }
     }
     
     public void act() {
-        // Update Food
+        // Update Money
         removeObject(moneyLabel);
         moneyLabel = new Label("$" + money,40);
         addObject(moneyLabel, 50, 50);
         
+        // Check money
+        if(money <= 0) {
+            EndWorld end = new EndWorld(money);
+            Greenfoot.setWorld(end);
+        }
+        
+        // Spawn customers
         if (Greenfoot.getRandomNumber (500) == 0){
             Customer c = new Customer();
             addObject(c,getWidth()/2+Greenfoot.getRandomNumber(getWidth()/2),getHeight()/2+getHeight()/4);

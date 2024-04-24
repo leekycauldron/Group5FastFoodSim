@@ -10,6 +10,7 @@ import java.util.List;
 public class Customer extends Actor
 {
     GifImage customerGif = new GifImage("customerWalking.gif");
+    GreenfootSound walkingSound = new GreenfootSound("walking.mp3");
     
     protected String[] foodItems = {"burger", "hotdog"};
     protected String[] sideItems = {"fries","cola"};

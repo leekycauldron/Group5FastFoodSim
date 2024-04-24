@@ -8,14 +8,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EndWorld extends World
 {
-
-    /**
-     * Constructor for objects of class EndWorld.
-     * 
-     */
-    public EndWorld()
+    private Label endTitle;
+    
+    public EndWorld(int money)
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        
+        
+        
+        
+        if (money <= 0) {
+            endTitle = new Label("BANKRUPT",40);
+        } else if (money <= 100) {
+            endTitle = new Label("Barely...",40);
+        } else {
+            endTitle = new Label("RICH!",40);
+        }
+        
+        addObject(endTitle,getWidth()/2,getHeight()/2);
+        
     }
 }

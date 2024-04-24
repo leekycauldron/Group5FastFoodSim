@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Cook extends Employee
 {
     GifImage cookGif = new GifImage("cook.gif");
+    GreenfootSound cookingSound = new GreenfootSound("cooking.mp3");
     
     private boolean working = false; // when received order but may necessarily be at equipment
     private boolean cooking = false; // when using cooking equipment
@@ -151,6 +152,7 @@ public class Cook extends Employee
             }
             else {
                 if(!cooking) {
+                    cookingSound.stop();
                     if (order.size() <= 0) {
                         // done order, set working to false
                         gotOrder = true;
@@ -174,7 +176,10 @@ public class Cook extends Employee
                     }
                     
                 } else {
-                    // Cooking animation here
+                    // Cooking sound here
+                    if(!cookingSound.isPlaying()) {
+                        cookingSound.play();
+                    }
                 }
             }
         } else {
