@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=MainWorld
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ MainWorld\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=COOK_COUNT\ COUNTER_COUNT\ GRILL_COUNT\ FRYER_COUNT
-comment1.target=MainWorld(int,\ int,\ int,\ int)
+comment1.params=COOK_COUNT\ COUNTER_COUNT\ GRILL_COUNT\ FRYER_COUNT\ FOUNTAIN_COUNT
+comment1.target=MainWorld(int,\ int,\ int,\ int,\ int)
 comment2.params=amt
 comment2.target=void\ addMoney(int)
 comment3.params=

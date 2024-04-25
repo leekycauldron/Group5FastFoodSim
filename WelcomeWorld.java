@@ -11,27 +11,58 @@ public class WelcomeWorld extends World
     
     Button startBtn = new Button(Color.RED, 100, 50, "Start");
     GreenfootImage selectImage = new GreenfootImage("select.png");
+    GreenfootSound bgMusic = new GreenfootSound("bg_music.wav");
+    Label employeeWageTitle = new Label("Hourly Wage",40);
+    Label employeeWageLabel = new Label("$0/hr",40);
+    Label utilitiesTitle = new Label("Hourly Utilities",35);
+    Label utilitiesLabel = new Label("$0/hr",40);
+    // Min, max, current value
+    ValueItem[] valueItems = {
+        new ValueItem(0, 0, 10), // Cook Count
+        new ValueItem(0, 0, 6),  // Counter Count
+        new ValueItem(0, 0, 7),  // Grill Count
+        new ValueItem(0, 0, 4),   // Fryer Count
+        new ValueItem(0, 0, 3)    // Fountain Count
+    };
     public WelcomeWorld()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        bgMusic.setVolume(50);
         prepare();
     }
     
-        
+    public void started() {
+        bgMusic.playLoop();
+    }
+    
+    public void stopped() {
+        bgMusic.stop();
+    }
+    
+    public void displayWage() {
+        removeObject(employeeWageLabel);
+        employeeWageLabel = new Label("$"+valueItems[0].value*Constants.COOK_WAGE+"/hr",40);
+        addObject(employeeWageLabel,getWidth()-100,100);
+    }
+    public void displayUtilities() {
+        removeObject(utilitiesLabel);
+        int utilities = valueItems[1].value*Constants.COUNTER_PRICE + valueItems[2].value*Constants.GRILL_PRICE + valueItems[3].value*Constants.FRYER_PRICE + valueItems[4].value*Constants.FOUNTAIN_PRICE;
+        // Multiple utilities by 2 because it charges every half hour
+        utilitiesLabel = new Label("$"+utilities*2+"/hr",40);
+        addObject(utilitiesLabel,getWidth()-100,200);
+    }
+    
+    
     public void showMenu() {
         
         setBackground(selectImage);
         removeObjects(getObjects(null)); // Clears the screen
-    
-        // Array of value items
-        ValueItem[] valueItems = {
-            new ValueItem(0, 0, 10), // Cook Count
-            new ValueItem(0, 0, 5),  // Counter Count
-            new ValueItem(0, 0, 8),  // Grill Count
-            new ValueItem(0, 0, 6)   // Fryer Count
-        };
-        String[] valueNames = {"Cook Count", "Counter Count", "Grill Count", "Fryer Count"};
+        addObject(employeeWageTitle,getWidth()-100,50);
+        addObject(employeeWageLabel,getWidth()-100,100);
+        addObject(utilitiesTitle,getWidth()-100,150);
+        addObject(utilitiesLabel,getWidth()-100,200);
+        
+        String[] valueNames = {"Cook Count", "Counter Count", "Grill Count", "Fryer Count", "Fountain Count"};
         int startY = 50; // Start Y position for the first item
         int spacing = 50; // Vertical spacing between items
     
@@ -58,6 +89,8 @@ public class WelcomeWorld extends World
             minusBtn.init();
             minusBtn.setOnClickAction(() -> {
                 valueItems[indexMinus].updateValue(this,labelX,yPos,-1);
+                displayWage();
+                displayUtilities();
             });
             
     
@@ -68,15 +101,17 @@ public class WelcomeWorld extends World
             plusBtn.init();
             plusBtn.setOnClickAction(() -> {
                 valueItems[indexPlus].updateValue(this,labelX,yPos,1);
+                displayWage();
+                displayUtilities();
             });
             
         }
         
         Button startBtn = new Button(Color.YELLOW,200,50,"Run Simulation");
-        addObject(startBtn,getWidth()/2,getHeight()-100);
+        addObject(startBtn,getWidth()/2,getHeight()-50);
         startBtn.init();
         startBtn.setOnClickAction(() -> {
-           MainWorld w = new MainWorld(valueItems[0].value,valueItems[1].value,valueItems[2].value,valueItems[3].value);
+           MainWorld w = new MainWorld(valueItems[0].value,valueItems[1].value,valueItems[2].value,valueItems[3].value,valueItems[4].value);
            Greenfoot.setWorld(w);
         });
     }

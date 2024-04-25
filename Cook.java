@@ -43,8 +43,20 @@ public class Cook extends Employee
                 return fryer;
             }
         }
-        return null; // No free grill found
+        return null; // No free fryer found
     }
+    
+    private Fountain findFountain() {
+        List<Fountain> fountains = getWorld().getObjects(Fountain.class);
+        for (Fountain fountain : fountains) {
+            if (!fountain.isInUse()) {
+                return fountain;
+            }
+        }
+        return null; // No free fountain  found
+    }
+    
+    
     
     
     
@@ -91,6 +103,27 @@ public class Cook extends Employee
         } 
     }
     
+    private void goToFountain() {
+        Fountain fountain = findFountain();
+        if (fountain != null) {
+                if (!intersects(fountain)) {
+                    // Move towards the counter with an order
+                    turnTowards(fountain.getX(), fountain.getY());
+                    move(1); // Adjust the speed as needed
+                    if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
+                        getImage().mirrorHorizontally();
+                        isImageFlipped = !isImageFlipped; // Update the flipped state
+                    }else {
+                        setRotation(0); // Facing right
+                    }
+                } else {
+                    // Get drink!
+                    fountain.use(this);
+                    cooking = true;
+                }
+        } 
+    }
+    
     private Counter findOrderCounter() {
         List<Counter> counters = getWorld().getObjects(Counter.class);
         for (Counter counter : counters) {
@@ -125,11 +158,11 @@ public class Cook extends Employee
                             break;
                         case "fries":
                             world.addMoney(world.FRIES_PRICE);
-                            goToFryer(); // temporary
+                            goToFryer(); 
                             break;
                         case "cola":
                             world.addMoney(world.COLA_PRICE);
-                            goToGrill(); // temporary
+                            goToFountain();
                             break;
                         default:
                             break;
@@ -166,10 +199,10 @@ public class Cook extends Employee
                             goToGrill();
                             break;
                         case "fries":
-                            goToFryer(); // temporary
+                            goToFryer();
                             break;
                         case "cola":
-                            goToGrill(); // temporary
+                            goToFountain();
                             break;
                         default:
                             break;

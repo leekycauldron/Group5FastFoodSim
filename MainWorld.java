@@ -14,14 +14,21 @@ public class MainWorld extends World
     public static int COUNTER_COUNT;
     public static int GRILL_COUNT;
     public static int FRYER_COUNT;
+    public static int FOUNTAIN_COUNT;
     // Staff Wages
-    public static final int COOK_WAGE = 8;
+    public static final int COOK_WAGE = Constants.COOK_WAGE;
     
     // Prices
-    public static final int BURGER_PRICE = 5;
-    public static final int FRIES_PRICE = 2;
-    public static final int COLA_PRICE = 2;
-    public static final int HOTDOG_PRICE = 4;
+    public static final int BURGER_PRICE = Constants.BURGER_PRICE;
+    public static final int FRIES_PRICE = Constants.FRIES_PRICE;
+    public static final int COLA_PRICE = Constants.COLA_PRICE;
+    public static final int HOTDOG_PRICE = Constants.HOTDOG_PRICE;
+    
+    public static final int COUNTER_PRICE = Constants.COUNTER_PRICE;
+    public static final int GRILL_PRICE = Constants.GRILL_PRICE;
+    public static final int FRYER_PRICE = Constants.FRYER_PRICE;
+    public static final int FOUNTAIN_PRICE = Constants.FOUNTAIN_PRICE;
+    
     
     
     public int money = 50;
@@ -32,7 +39,7 @@ public class MainWorld extends World
     SimpleTimer utilTimer = new SimpleTimer(); // Keep track of when to pay utilities.
     SimpleTimer timer = new SimpleTimer(); // Keep track of the day time
     
-    public MainWorld(int COOK_COUNT, int COUNTER_COUNT, int GRILL_COUNT, int FRYER_COUNT)
+    public MainWorld(int COOK_COUNT, int COUNTER_COUNT, int GRILL_COUNT, int FRYER_COUNT, int FOUNTAIN_COUNT)
     {    
         
         
@@ -44,12 +51,13 @@ public class MainWorld extends World
         this.COUNTER_COUNT = COUNTER_COUNT;
         this.GRILL_COUNT = GRILL_COUNT;
         this.FRYER_COUNT = FRYER_COUNT;
+        this.FOUNTAIN_COUNT = FOUNTAIN_COUNT;
         
         addObject(moneyLabel, 50, 50);
         // Spawn all equipment and employees based on the counts
         for(int i = 0; i < COUNTER_COUNT;i++) {
             Counter counter = new Counter();
-            addObject(counter, (getWidth()/2)+30+50*i,getHeight()/2);
+            addObject(counter, (getWidth()/3)+30+50*i,(getHeight()/2)+50);
         }
         for(int i = 0; i < COOK_COUNT; i++) {
             Cook cook = new Cook();
@@ -57,14 +65,18 @@ public class MainWorld extends World
         }
         for(int i = 0; i < GRILL_COUNT; i++) {
             Grill grill = new Grill();
-            addObject(grill,(getWidth()/2)+60*i,getHeight()/2-150);
+            addObject(grill,(getWidth()/4)+60*i,getHeight()/2-150);
         }
         for(int i = 0; i < FRYER_COUNT; i++) {
             Fryer fryer = new Fryer();
-            addObject(fryer,getWidth()-50,50+50*i);
+            addObject(fryer,getWidth()-50,100+50*i);
+        }
+        for(int i = 0; i < FOUNTAIN_COUNT; i++) {
+            Fountain fountain = new Fountain();
+            addObject(fountain,50,50+100*i);
         }
         Pickup pickup = new Pickup();
-        addObject(pickup, (getWidth()/2)-70,getHeight()/2);
+        addObject(pickup, (getWidth()/4),(getHeight()/2)+50);
         Exit exit = new Exit();
         addObject(exit,getWidth()/4 ,getHeight());
         
@@ -87,7 +99,7 @@ public class MainWorld extends World
         if (utilTimer.millisElapsed() > 5000) {
             utilTimer.mark();
             // Utilities (depends on equipment count)
-            money -= 1*COUNTER_COUNT - 3*GRILL_COUNT - 2*FRYER_COUNT;
+            money -= COUNTER_PRICE*COUNTER_COUNT + GRILL_PRICE*GRILL_COUNT + FRYER_PRICE*FRYER_COUNT - FOUNTAIN_PRICE*FOUNTAIN_COUNT;
         }
         if (timer.millisElapsed() > 10000) {
             timer.mark();

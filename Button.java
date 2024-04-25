@@ -44,6 +44,9 @@ public class Button extends Actor
     public void act()
     {
         if(Greenfoot.mouseClicked(this) || Greenfoot.mouseClicked(contentLabel)) {
+            // Initialize sound each time in case user spam clicks.
+            GreenfootSound clickSound = new GreenfootSound("click.mp3");
+            clickSound.play();
             clickAction.run();
         }
     }
