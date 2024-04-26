@@ -30,8 +30,21 @@ public class MainWorld extends World
     public static final int FOUNTAIN_PRICE = Constants.FOUNTAIN_PRICE;
     
     
+    // Stats: Burgers, Fries, Cola, Hotdog, customersServed
+    public int[] stats = {0,0,0,0,0};
+    public int burgerSold;
+    public int friesSold;
+    public int colaSold;
+    public int hotdogSold;
+    public int cutomersServed;
     
-    public int money = 50;
+    public void increaseStat(int idx) {
+        stats[idx]++;
+    }
+    
+    
+    
+    public int money = 100;
     public int time = 9;
     Label moneyLabel = new Label("$" + money,40);
     Label timeLabel = new Label(time+":00",40);
@@ -114,7 +127,7 @@ public class MainWorld extends World
                 addObject(timeLabel, 80, 80);
             }
             if (time == 17) {
-                EndWorld end = new EndWorld(money);
+                EndWorld end = new EndWorld(money,stats);
                 Greenfoot.setWorld(end);
             }
         }
@@ -128,12 +141,12 @@ public class MainWorld extends World
         
         // Check money
         if(money <= 0) {
-            EndWorld end = new EndWorld(money);
+            EndWorld end = new EndWorld(money,stats);
             Greenfoot.setWorld(end);
         }
         
         // Spawn customers
-        if (Greenfoot.getRandomNumber (500) == 0){
+        if (Greenfoot.getRandomNumber (300) == 0){
             Customer c = new Customer();
             addObject(c,getWidth()/2+Greenfoot.getRandomNumber(getWidth()/2),getHeight()/2+getHeight()/4);
         }

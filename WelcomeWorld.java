@@ -123,7 +123,7 @@ public class WelcomeWorld extends World
         addObject(startBtn, getWidth()/2, getHeight()/2+100);
         startBtn.init();
         startBtn.setOnClickAction(() -> {
-            showMenu();
-        });
+                    showMenu();
+            });
     }
 }

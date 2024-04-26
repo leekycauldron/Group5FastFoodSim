@@ -150,18 +150,22 @@ public class Cook extends Employee
                     switch(item) {
                         case "burger":
                             world.addMoney(world.BURGER_PRICE);
+                            world.increaseStat(0);
                             goToGrill();
                             break;
                         case "hotdog":
                             world.addMoney(world.HOTDOG_PRICE);
+                            world.increaseStat(3);
                             goToGrill();
                             break;
                         case "fries":
                             world.addMoney(world.FRIES_PRICE);
+                            world.increaseStat(1);
                             goToFryer(); 
                             break;
                         case "cola":
                             world.addMoney(world.COLA_PRICE);
+                            world.increaseStat(2);
                             goToFountain();
                             break;
                         default:
@@ -180,6 +184,7 @@ public class Cook extends Employee
                     working = false;
                     addedMoney = false;
                     currentCustomer.getOrder(); // give customer their order
+                    world.increaseStat(4);
                     return;
                 }
             }

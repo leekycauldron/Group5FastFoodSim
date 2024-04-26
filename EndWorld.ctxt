@@ -1,5 +1,7 @@
 #BlueJ class context
 comment0.target=EndWorld
-comment1.params=money
-comment1.target=EndWorld(int)
-numComments=2
+comment1.params=money\ stats
+comment1.target=EndWorld(int,\ int[])
+comment2.params=
+comment2.target=void\ act()
+numComments=3
