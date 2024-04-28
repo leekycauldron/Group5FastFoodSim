@@ -3,8 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Title Screen to allow the user to change values and start the simulation.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson, Bonnie, Matthew
  */
 public class WelcomeWorld extends World
 {
@@ -16,7 +15,10 @@ public class WelcomeWorld extends World
     Label employeeWageLabel = new Label("$0/hr",40);
     Label utilitiesTitle = new Label("Hourly Utilities",35);
     Label utilitiesLabel = new Label("$0/hr",40);
+    
+    
     // Min, max, current value
+    // Array of ValueItem (A custom class that stores min, max, current value)
     ValueItem[] valueItems = {
         new ValueItem(0, 0, 10), // Cook Count
         new ValueItem(0, 0, 6),  // Counter Count
@@ -24,6 +26,10 @@ public class WelcomeWorld extends World
         new ValueItem(0, 0, 4),   // Fryer Count
         new ValueItem(0, 0, 3)    // Fountain Count
     };
+    
+    /*
+     * Create the welcome world
+     */
     public WelcomeWorld()
     {    
         super(600, 400, 1); 
@@ -39,12 +45,17 @@ public class WelcomeWorld extends World
         bgMusic.stop();
     }
     
-    public void displayWage() {
+    
+    // Display the wage per hour based on employee count and wage
+    private void displayWage() {
         removeObject(employeeWageLabel);
         employeeWageLabel = new Label("$"+valueItems[0].value*Constants.COOK_WAGE+"/hr",40);
         addObject(employeeWageLabel,getWidth()-100,100);
     }
-    public void displayUtilities() {
+    
+    
+    // Display the utility costs of all the equipment x2 as it is costed every half hour
+    private void displayUtilities() {
         removeObject(utilitiesLabel);
         int utilities = valueItems[1].value*Constants.COUNTER_PRICE + valueItems[2].value*Constants.GRILL_PRICE + valueItems[3].value*Constants.FRYER_PRICE + valueItems[4].value*Constants.FOUNTAIN_PRICE;
         // Multiple utilities by 2 because it charges every half hour
@@ -52,8 +63,8 @@ public class WelcomeWorld extends World
         addObject(utilitiesLabel,getWidth()-100,200);
     }
     
-    
-    public void showMenu() {
+    // Display the value menu
+    private void showMenu() {
         
         setBackground(selectImage);
         removeObjects(getObjects(null)); // Clears the screen
@@ -62,8 +73,9 @@ public class WelcomeWorld extends World
         addObject(utilitiesTitle,getWidth()-100,150);
         addObject(utilitiesLabel,getWidth()-100,200);
         
+        // Names for each of the values stored in ValueItems
         String[] valueNames = {"Cook Count", "Counter Count", "Grill Count", "Fryer Count", "Fountain Count"};
-        int startY = 50; // Start Y position for the first item
+        int startY = 50; // Start Y position for the first value
         int spacing = 50; // Vertical spacing between items
     
         for(int i = 0; i < valueItems.length; i++) {
@@ -83,7 +95,7 @@ public class WelcomeWorld extends World
             valueItems[i].createLabel(this, labelX, yPos);
     
             // Minus Button
-            int indexMinus = i; // Need a effectively final variable for lambda
+            int indexMinus = i;
             Button minusBtn = new Button(Color.RED, 50, 50, "-");
             addObject(minusBtn, minusBtnX, yPos);
             minusBtn.init();
@@ -95,7 +107,7 @@ public class WelcomeWorld extends World
             
     
             // Plus Button
-            int indexPlus = i; // Need a effectively final variable for lambda
+            int indexPlus = i; 
             Button plusBtn = new Button(Color.GREEN, 50, 50, "+");
             addObject(plusBtn, plusBtnX, yPos);
             plusBtn.init();
@@ -111,6 +123,7 @@ public class WelcomeWorld extends World
         addObject(startBtn,getWidth()/2,getHeight()-50);
         startBtn.init();
         startBtn.setOnClickAction(() -> {
+            // Send in user values to mainworld
            MainWorld w = new MainWorld(valueItems[0].value,valueItems[1].value,valueItems[2].value,valueItems[3].value,valueItems[4].value);
            Greenfoot.setWorld(w);
         });
@@ -120,6 +133,7 @@ public class WelcomeWorld extends World
 
     private void prepare()
     {
+        // Show the value menu once player starts
         addObject(startBtn, getWidth()/2, getHeight()/2+100);
         startBtn.init();
         startBtn.setOnClickAction(() -> {

@@ -2,6 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Simply a class that stores final values that can be accessed anywhere
+ * 
+ * @author Bryson
  */
 public class Constants extends Actor
 {

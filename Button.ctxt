@@ -1,10 +1,12 @@
 #BlueJ class context
 comment0.target=Button
-comment0.text=\r\n\ A\ modular\ button\ class\ that\ can\ change\ color,\ size,\ and\ shape(?).\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ A\ modular\ button\ class\ that\ can\ change\ color,\ size\ and\ content.\r\n\ \r\n\ @author\ Bryson\ \r\n
 comment1.params=bgColor\ width\ height\ content
 comment1.target=Button(greenfoot.Color,\ int,\ int,\ java.lang.String)
+comment1.text=\r\n\ Button\ constructor\ to\ take\ in\ content,\ size\ and\ color.\r\n\ \r\n\ @param\ bgColor\ The\ Color\ of\ the\ Button\ \r\n\ @param\ width\ Width\ of\ the\ Button\r\n\ @param\ height\ of\ the\ Button\r\n\ @param\ content\ Text\ Content\ of\ the\ button\r\n
 comment2.params=
 comment2.target=void\ init()
+comment2.text=\r\n\ Initiates\ the\ button's\ look\ (must\ be\ done\ after\ added\ to\ world)\r\n
 comment3.params=clickAction
 comment3.target=void\ setOnClickAction(java.lang.Runnable)
 comment4.params=

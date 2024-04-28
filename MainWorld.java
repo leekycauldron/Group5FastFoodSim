@@ -1,20 +1,25 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MainWorld here.
+ * The Main simulation world where the fast food restaurant runs - spawns all the equipment 
+ * and staff depending on what the user inputted before.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson, Bonnie, Matthew
+ * 
  */
+
+
 public class MainWorld extends World
 {
-    // THESE FINAL VARIABLES ARE HARDCODED FOR NOW (TODO: add values from title screen)
     // Staff + Equipment Count
     public static int COOK_COUNT;
     public static int COUNTER_COUNT;
     public static int GRILL_COUNT;
     public static int FRYER_COUNT;
     public static int FOUNTAIN_COUNT;
+    
+    
+    // Grab stats from a separate class as they are used in the starting world too.
     // Staff Wages
     public static final int COOK_WAGE = Constants.COOK_WAGE;
     
@@ -38,24 +43,39 @@ public class MainWorld extends World
     public int hotdogSold;
     public int cutomersServed;
     
+    
+    /**
+     * Increases the stat based on the index given, the order is commented at array instantiation.
+     * 
+     * @param idx The index of which the stat should increase by one.
+     */
     public void increaseStat(int idx) {
         stats[idx]++;
     }
+
     
-    
-    
-    public int money = 100;
-    public int time = 9;
+    public int money = 100; // Starting Money
+    public int time = 9; // 9AM - 5PM
     Label moneyLabel = new Label("$" + money,40);
     Label timeLabel = new Label(time+":00",40);
     SimpleTimer wageTimer = new SimpleTimer(); // Keep track of when to pay wages.
     SimpleTimer utilTimer = new SimpleTimer(); // Keep track of when to pay utilities.
     SimpleTimer timer = new SimpleTimer(); // Keep track of the day time
     
+    
+    
+    
+    /**
+     * Main World Creation, spawn all the equipment and staff according to user setup
+     * 
+     * @param COOK_COUNT Count of cooks in game
+     * @param COUNTER_COUNT Count of Counters in game
+     * @param GRILL_COUNT Count of grills in game
+     * @param FRYER_COUNT Count of fryers in game
+     * @param FOUNTAIN_COUNT Count of fountains in game
+     */
     public MainWorld(int COOK_COUNT, int COUNTER_COUNT, int GRILL_COUNT, int FRYER_COUNT, int FOUNTAIN_COUNT)
     {    
-        
-        
         
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
@@ -97,13 +117,20 @@ public class MainWorld extends World
         addObject(timeLabel, 80, 80);
     }
     
+    /**
+     * Adds money to the total based on parameter amt
+     * 
+     * @param amt Amount of money being added to total.
+     */
     public void addMoney(int amt) {
         this.money += amt;
     }
     
     
     // Handle all the timer events
-    public void timerCheck() {
+    private void timerCheck() {
+        // Every simulation hour is 10 real seconds,
+        // Wage is costed every 10 real seconds, Utilities costed every 5 real seconds.
         if(wageTimer.millisElapsed() > 10000) {
             wageTimer.mark();
             // Employee Wages
@@ -117,6 +144,7 @@ public class MainWorld extends World
         if (timer.millisElapsed() > 10000) {
             timer.mark();
             time++;
+            // Get AM or PM
             if(time < 13) {
                 removeObject(timeLabel);
                 timeLabel = new Label(time+":00 AM",40);
@@ -126,6 +154,7 @@ public class MainWorld extends World
                 timeLabel = new Label((time-12)+":00 PM",40);
                 addObject(timeLabel, 80, 80);
             }
+            // At 5PM, end simulation
             if (time == 17) {
                 EndWorld end = new EndWorld(money,stats);
                 Greenfoot.setWorld(end);

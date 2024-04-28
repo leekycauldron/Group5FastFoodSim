@@ -1,10 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * A modular button class that can change color, size, and shape(?).
+ * A modular button class that can change color, size and content.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson 
  */
 public class Button extends Actor
 {
@@ -15,7 +14,14 @@ public class Button extends Actor
     private Label contentLabel;
     private Runnable clickAction = null;
 
-    
+    /*
+     * Button constructor to take in content, size and color.
+     * 
+     * @param bgColor The Color of the Button 
+     * @param width Width of the Button
+     * @param height of the Button
+     * @param content Text Content of the button
+     */    
     public Button(Color bgColor, int width, int height, String content) {
         this.bgColor = bgColor;
         this.width = width;
@@ -24,8 +30,10 @@ public class Button extends Actor
     }
     
     
-    // Must call in order to draw button
-    // Cannot run at instantiation as constructor runs before added to world
+    
+    /*
+     * Initiates the button's look (must be done after added to world)
+     */
     public void init() {
         GreenfootImage image = new GreenfootImage(width, height);
         image.setColor(bgColor);
@@ -36,7 +44,7 @@ public class Button extends Actor
     }
     
     
-    // Chat GPT introduced me to Runnable type
+    // Chat GPT introduced me to Runnable type (Using it to allow button to have multiple purposes, set what happens when it is clicked)
     public void setOnClickAction(Runnable clickAction) {
         this.clickAction = clickAction;
     }

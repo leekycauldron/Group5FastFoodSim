@@ -1,8 +1,9 @@
 #BlueJ class context
 comment0.target=WelcomeWorld
-comment0.text=\r\n\ Title\ Screen\ to\ allow\ the\ user\ to\ change\ values\ and\ start\ the\ simulation.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Title\ Screen\ to\ allow\ the\ user\ to\ change\ values\ and\ start\ the\ simulation.\r\n\ \r\n\ @author\ Bryson,\ Bonnie,\ Matthew\r\n
 comment1.params=
 comment1.target=WelcomeWorld()
+comment1.text=\r\n\ Create\ the\ welcome\ world\r\n
 comment2.params=
 comment2.target=void\ started()
 comment3.params=

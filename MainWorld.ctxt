@@ -1,12 +1,15 @@
 #BlueJ class context
 comment0.target=MainWorld
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ MainWorld\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ The\ Main\ simulation\ world\ where\ the\ fast\ food\ restaurant\ runs\ -\ spawns\ all\ the\ equipment\ \r\n\ and\ staff\ depending\ on\ what\ the\ user\ inputted\ before.\r\n\ \r\n\ @author\ Bryson,\ Bonnie,\ Matthew\r\n\ \r\n
 comment1.params=idx
 comment1.target=void\ increaseStat(int)
+comment1.text=\r\n\ Increases\ the\ stat\ based\ on\ the\ index\ given,\ the\ order\ is\ commented\ at\ array\ instantiation.\r\n\ \r\n\ @param\ idx\ The\ index\ of\ which\ the\ stat\ should\ increase\ by\ one.\r\n
 comment2.params=COOK_COUNT\ COUNTER_COUNT\ GRILL_COUNT\ FRYER_COUNT\ FOUNTAIN_COUNT
 comment2.target=MainWorld(int,\ int,\ int,\ int,\ int)
+comment2.text=\r\n\ Main\ World\ Creation,\ spawn\ all\ the\ equipment\ and\ staff\ according\ to\ user\ setup\r\n\ \r\n\ @param\ COOK_COUNT\ Count\ of\ cooks\ in\ game\r\n\ @param\ COUNTER_COUNT\ Count\ of\ Counters\ in\ game\r\n\ @param\ GRILL_COUNT\ Count\ of\ grills\ in\ game\r\n\ @param\ FRYER_COUNT\ Count\ of\ fryers\ in\ game\r\n\ @param\ FOUNTAIN_COUNT\ Count\ of\ fountains\ in\ game\r\n
 comment3.params=amt
 comment3.target=void\ addMoney(int)
+comment3.text=\r\n\ Adds\ money\ to\ the\ total\ based\ on\ parameter\ amt\r\n\ \r\n\ @param\ amt\ Amount\ of\ money\ being\ added\ to\ total.\r\n
 comment4.params=
 comment4.target=void\ timerCheck()
 comment5.params=

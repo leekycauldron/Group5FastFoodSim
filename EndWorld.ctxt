@@ -1,7 +1,9 @@
 #BlueJ class context
 comment0.target=EndWorld
+comment0.text=\r\n\ End\ World\ for\ the\ Simulation\r\n\ -\ Will\ show\ user\ stats\ like\ burgers\ sold,\ fries\ sold,\ money\ made\ etc...\r\n\ -\ If\ user\ failed\ ($0)\:\ Will\ show\ BANKRUPT\ Message\r\n\ \r\n\ @author\ Bryson,\ Bonnie,\ Matthew\r\n
 comment1.params=money\ stats
 comment1.target=EndWorld(int,\ int[])
+comment1.text=\r\n\ End\ World\ Constructor\ -\ set\ up\ all\ the\ labels\ and\ display\ the\ user's\ stats\ in\ a\ pleasing\ way.\r\n\ \r\n\ @param\ money\ The\ amount\ of\ money\ that\ the\ simulation\ has\ accumulated\r\n\ @param\ stats\ An\ array\ that\ contains\ all\ the\ stats\ like\ food\ sold\ and\ customers\ served\r\n
 comment2.params=
 comment2.target=void\ act()
 numComments=3
