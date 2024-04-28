@@ -1,10 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Fountain here.
+ * Fountain Class: used for cola.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson, Bonnie, Matthew
  */
 public class Fountain extends Equipment
 {

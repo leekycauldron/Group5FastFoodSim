@@ -1,17 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Grill here.
+ * Grill class for burgers and hotdogs.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson, Bonnie, Matthew
  */
 public class Grill extends Equipment
 {
-    /**
-     * Act - do whatever the Grill wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     
     private int useTime = 3;
     public Grill(){

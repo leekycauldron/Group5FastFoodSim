@@ -2,10 +2,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Write a description of class Customer here.
+ * The Customer that orders food, then waits at the pickup counter
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson, Bonnie, Matthew
  */
 public class Customer extends Actor
 {
@@ -16,30 +15,22 @@ public class Customer extends Actor
     protected String[] sideItems = {"fries","cola"};
     protected ArrayList<String> order = new ArrayList<String>();
     protected boolean ordered = false;
-    private boolean isImageFlipped = false;
+ 
     private int direction = 0;
     private boolean inPickupLine = false;
     private boolean exit = false;
-    private boolean fullLeaveDecided = false; // if counters full, only decide to leave ONCE
+    private boolean fullLeaveDecided = false; // if counters full, only decide to leave ONC    
     
-    public Customer() {
-        
-    }
-    
-    
-    
-    // TODO: put this in a separate "utils" class because it is likely other classes may use the function
-    // Used in a previous vehicle sim
-    // Find the nearest actor given the class specification in argument (Employee.class, Actor.class, Counter.class all work)
-    // Modified for counterONLY which finds the closest counter that is open
-    protected <T extends Counter> T findNearestCounter(Class<T> aClass) {
+
+    // Protected as the goal was to make multiple customer subclasses with different behaviour
+    protected Counter findNearestCounter(Class<Counter> counter) {
         // try catch needed for some reason as getting nearest actor if there is none returns error
         try{
-            ArrayList<T> actors = (ArrayList<T>)getWorld().getObjects(aClass);
-            T nearestActor = null;
+            ArrayList<Counter> actors = (ArrayList<Counter>)getWorld().getObjects(counter);
+            Counter nearestActor = null;
             double nearestDistance = Double.MAX_VALUE; // Set to biggest value and then update when a value is smaller.
     
-            for (T a : actors) {
+            for (Counter a : actors) {
                 double distance = getDistance(getX(), getY(), a.getX(), a.getY());
                 if (distance < nearestDistance && !a.isOrdered()) {
                     nearestDistance = distance;
@@ -59,17 +50,16 @@ public class Customer extends Actor
         return getWorld().getObjects(Pickup.class).get(0);
     }
     
+    // Get instance of exit so customers can use it.
     private Exit getExit() {
         return getWorld().getObjects(Exit.class).get(0);
     }
     
-    // Used in a previous vehicle sim
     // Get distance between two points using simple pythagorean theorem math
     protected double getDistance(int x1, int y1, int x2, int y2) {
         return Math.hypot(x2 - x1, y2 - y1);
     }
     
-    // Order if haven't ordered yet
     // Order a random amount of food items and then a random amount of side items
     protected void order(Counter counter) {
         if(!ordered){
@@ -87,12 +77,16 @@ public class Customer extends Actor
         }
     }
     
+    /*
+     * Called by cook when the order is done, tells customer to exit restaurant.
+     */
     public void getOrder() {
         exit = true;
     }
     
     public void act() 
     {
+        // True if order done, walk to exit then remove self.
         if(exit) {
             if(!intersects(getExit())) {
                 turnTowards(getExit().getX(),getExit().getY());
@@ -104,6 +98,7 @@ public class Customer extends Actor
                 getWorld().removeObject(this);
             }
         } else {
+            // Walk to nearest open counter if not ordered, then order
             if (!ordered) {
                 getImage().scale(34,46);
                 Counter nearestCounter = findNearestCounter(Counter.class);
@@ -117,17 +112,16 @@ public class Customer extends Actor
                         order(nearestCounter);
                     }
                 } else {
-                    // Chance to leave if counter is full
+                    // 20% Chance to leave if no open counter.
                     if(!fullLeaveDecided) {
                         fullLeaveDecided = true;
-                        if(Greenfoot.getRandomNumber(10) == 1) {
+                        if(Greenfoot.getRandomNumber(5) == 1) {
                             exit = true;
                         }
                     }
                 }
             } else { //ordered
                 //walk to x coord of pickup counter
-                
                 if(getX()>getPickup().getX()) {
                     turnTowards(getPickup().getX(),getPickup().getY()+25);
                     move(1);

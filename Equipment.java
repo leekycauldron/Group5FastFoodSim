@@ -1,25 +1,32 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Equipment here.
+ * Equipment super class with use time.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson, Bonnie, Matthew
  */
 public class Equipment extends Actor
 {
-    /**
-     * Act - do whatever the Equipment wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     private boolean inUse = false;
-    private int useTime = 1; // In Seconds.
+    private int useTime = 1; // How long it takes to use equipment (default one second).
     SimpleTimer useTimer = new SimpleTimer();
     private Cook cook; // Current cook using equipment.
     
+    
+    /*
+     * Checks if the equipment is in use or not.
+     * 
+     * @return boolean True if a employee is using equipment, False if a employee is not using equipment.
+     */
     public boolean isInUse() {
         return inUse;
     }
+    
+    /*
+     * Used by cook to start using the equipment and start use timer.
+     * 
+     * @param cook The cook object that is using the equpiment.
+     */
     public void use(Cook cook) {
         inUse = true;
         useTimer.mark();
@@ -27,11 +34,10 @@ public class Equipment extends Actor
     }
     public void act() 
     {
-        
+        // Check if time is up, then end cooking process.
         if(inUse && useTimer.millisElapsed() >= useTime * 1000) {
             inUse = false;
             cook.doneCook();
-            // make cook stop cooking
         } 
     }    
 }

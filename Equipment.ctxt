@@ -1,10 +1,12 @@
 #BlueJ class context
 comment0.target=Equipment
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Equipment\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Equipment\ super\ class\ with\ use\ time.\r\n\ \r\n\ @author\ Bryson,\ Bonnie,\ Matthew\r\n
 comment1.params=
 comment1.target=boolean\ isInUse()
+comment1.text=\r\n\ Checks\ if\ the\ equipment\ is\ in\ use\ or\ not.\r\n\ \r\n\ @return\ boolean\ True\ if\ a\ employee\ is\ using\ equipment,\ False\ if\ a\ employee\ is\ not\ using\ equipment.\r\n
 comment2.params=cook
 comment2.target=void\ use(Cook)
+comment2.text=\r\n\ Used\ by\ cook\ to\ start\ using\ the\ equipment\ and\ start\ use\ timer.\r\n\ \r\n\ @param\ cook\ The\ cook\ object\ that\ is\ using\ the\ equpiment.\r\n
 comment3.params=
 comment3.target=void\ act()
 numComments=4

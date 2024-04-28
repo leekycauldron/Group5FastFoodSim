@@ -1,14 +1,17 @@
 #BlueJ class context
 comment0.target=Pickup
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Pickup\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Pickup\ counter\ where\ customers\ wait\ for\ their\ order\ and\ cooks\ serve\ customers.\r\n\ \r\n\ @author\ Bryson,\ Bonnie,\ Matthew\r\n
 comment1.params=
 comment1.target=Pickup()
 comment2.params=
 comment2.target=int\ getLineCount()
+comment2.text=\r\n\ Gets\ the\ amount\ of\ people\ in\ line\ for\ the\ pickup\ counter\r\n\ \r\n\ @return\ int\ The\ amount\ of\ people\ in\ line\ at\ pickup\ counter\r\n
 comment3.params=
 comment3.target=void\ addLineCount()
+comment3.text=\r\n\ Adds\ one\ to\ the\ line\r\n
 comment4.params=
 comment4.target=void\ subLineCount()
+comment4.text=\r\n\ Subtract\ one\ to\ the\ line\r\n
 comment5.params=
 comment5.target=void\ act()
 numComments=6

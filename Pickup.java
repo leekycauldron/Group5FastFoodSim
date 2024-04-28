@@ -1,17 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Pickup here.
+ * Pickup counter where customers wait for their order and cooks serve customers.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson, Bonnie, Matthew
  */
 public class Pickup extends Equipment
 {
-    /**
-     * Act - do whatever the Pickup wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     private int lineCount;
     
     public Pickup(){
@@ -20,16 +15,30 @@ public class Pickup extends Equipment
         setImage(i);
     }
     
+    /*
+     * Gets the amount of people in line for the pickup counter
+     * 
+     * @return int The amount of people in line at pickup counter
+     */
     public int getLineCount() {
         return lineCount;
     }
     
+    /*
+     * Adds one to the line
+     */
     public void addLineCount() {
         lineCount++;
     }
+    
+    /*
+     * Subtract one to the line
+     */
     public void subLineCount() {
         lineCount--;
     }
+    
+    //Override equipment act code.
     public void act()
     {
         // Add your action code here.

@@ -2,29 +2,35 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 import java.util.ArrayList;
 /**
- * Write a description of class Cook here.
+ * Cooks find an order at the counter, cooks the order, serves customer, repeats.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * KNOWN ERROR (sort of): The find grill, fountain, fryer methods are very similar and just vary by their subclass, 
+ * could refactor to make it one method with a parameter equipment-type.
+ * 
+ * @author Bryson, Bonnie, Matthew
  */
 public class Cook extends Employee
 {
     GifImage cookGif = new GifImage("cook.gif");
     GreenfootSound cookingSound = new GreenfootSound("cooking.mp3");
     
-    private boolean working = false; // when received order but may necessarily be at equipment
-    private boolean cooking = false; // when using cooking equipment
+    private boolean working = false; // Order received
+    private boolean cooking = false; // Order received AND cooking
     private int direction = 0;
     private boolean isImageFlipped = false;
     private ArrayList<String> order = new ArrayList<String>();
     private Customer currentCustomer;
-    private boolean addedMoney = false; // Only add money once per item!
+    private boolean addedMoney = false; // Keep track if added money from order.
     private boolean gotOrder = false; // If cook is done order and they need to give to customer.
-
+    
+    
     public Cook(){
         setImage(cookGif.getCurrentImage());
         getImage().scale(33, 53);
     }
+    
+    
+
 
     private Grill findGrill() {
         List<Grill> grills = getWorld().getObjects(Grill.class);
@@ -134,7 +140,9 @@ public class Cook extends Employee
         return null; // No counter with an order found
     }
 
-    
+    /*
+     * Used by equipment to let cook now that the order item is done cooking and can move on.
+     */
     public void doneCook() {
         cooking = false;
         order.remove(0);
@@ -144,6 +152,7 @@ public class Cook extends Employee
     {
         MainWorld world = (MainWorld) getWorld();
         if (working) {
+            // Add money based on order item and increase stats.
             if(!addedMoney) {
                 for(String item : order) {
                     addedMoney = true;
@@ -173,7 +182,7 @@ public class Cook extends Employee
                     }
                 }
             }
-            
+            // Once order is done, go to pickup and serve customer.
             if(gotOrder) {
                 Pickup p = getWorld().getObjects(Pickup.class).get(0);
                 if(!intersects(p)){
@@ -191,11 +200,13 @@ public class Cook extends Employee
             else {
                 if(!cooking) {
                     cookingSound.stop();
+                    // If all items done, complete order.
                     if (order.size() <= 0) {
                         // done order, set working to false
                         gotOrder = true;
                         return;
                     }
+                    // Get the next item in the order and walk to appropriate equipment.
                     switch(order.get(0)) {
                         case "burger":
                             goToGrill();
@@ -220,6 +231,8 @@ public class Cook extends Employee
                     }
                 }
             }
+            
+        // If no order in hands, go to counter with an order and take it
         } else {
             Counter orderCounter = findOrderCounter();
             if (orderCounter != null) {

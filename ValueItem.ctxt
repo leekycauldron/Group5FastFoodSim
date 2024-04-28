@@ -1,10 +1,13 @@
 #BlueJ class context
 comment0.target=ValueItem
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ ValueItem\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ A\ class\ that\ is\ used\ for\ keeping\ track\ of\ a\ value.\ It\ has\ a\ min,\ max\ and\ current\ value.\ Used\ for\ keeping\ track\ of\ \r\n\ the\ values\ in\ the\ title\ screen.\r\n\ \r\n\ @author\ Bryson\r\n
 comment1.params=initialValue\ minValue\ maxValue
 comment1.target=ValueItem(int,\ int,\ int)
+comment1.text=\r\n\ Create\ the\ Value\ Item\ with\ the\ proper\ values\r\n\ \r\n\ @param\ initialValue\ The\ value\ to\ give\ the\ item\ (usually\ 0)\r\n\ @param\ minValue\ The\ lowest\ the\ value\ item\ can\ go\r\n\ @param\ maxValue\ The\ highest\ the\ value\ item\ can\ go\r\n
 comment2.params=world\ x\ y
 comment2.target=void\ createLabel(greenfoot.World,\ int,\ int)
-comment3.params=world\ x\ y\ delta
+comment2.text=\r\n\ Creates\ the\ value\ item\ label\ to\ display\ the\ current\ value\ at\ a\ certain\ coordinate\r\n\ \r\n\ @param\ world\ The\ world\ to\ display\ the\ value\ label\ in\r\n\ @param\ x\ The\ x\ coordinate\ the\ label\ is\ at\r\n\ @param\ y\ The\ y\ coordinate\ the\ label\ is\ at\r\n
+comment3.params=world\ x\ y\ change
 comment3.target=void\ updateValue(greenfoot.World,\ int,\ int,\ int)
+comment3.text=\r\n\ Updates\ the\ value\ item's\ value\ and\ the\ label\r\n\ \r\n\ @param\ world\ The\ world\ to\ display\ the\ value\ label\ in\r\n\ @param\ x\ The\ x\ coordinate\ the\ label\ is\ at\r\n\ @param\ y\ The\ y\ coordinate\ the\ label\ is\ at\r\n\ @param\ change\ The\ amount\ to\ increase\ the\ value\ by\r\n
 numComments=4
