@@ -16,11 +16,11 @@ public class Janitor extends Employee
     
     
     // Get distance between two points using simple pythagorean theorem math
-    protected double getDistance(int x1, int y1, int x2, int y2) {
+    private double getDistance(int x1, int y1, int x2, int y2) {
         return Math.hypot(x2 - x1, y2 - y1);
     }
     
-    protected Trash findNearestTrash(Class<Trash> trash) {
+    private Trash findNearestTrash(Class<Trash> trash) {
         // try catch needed for some reason as getting nearest actor if there is none returns error
         try{
             ArrayList<Trash> actors = (ArrayList<Trash>)getWorld().getObjects(trash);
@@ -46,6 +46,7 @@ public class Janitor extends Employee
     {
         Trash trash = findNearestTrash(Trash.class);
         Supplies s = getWorld().getObjects(Supplies.class).get(0);
+        // Must have broom to clean one mess
         if(gotBroom) {
             if (trash != null) {
             if(!intersects(trash)) {
@@ -56,6 +57,7 @@ public class Janitor extends Employee
                 gotBroom = false;
             }
         }
+        // Go to supply closet to get a broom if no broom.
         } else {
             if(!intersects(s)) {
                 turnTowards(s.getX(),s.getY());
