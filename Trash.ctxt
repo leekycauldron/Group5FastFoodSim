@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Trash
+comment1.params=
+comment1.target=Trash()
+comment2.params=
+comment2.target=void\ pickup()
+comment2.text=\r\n\ Used\ by\ janitors\ to\ remove\ this\ trash\ object.\r\n
+numComments=3

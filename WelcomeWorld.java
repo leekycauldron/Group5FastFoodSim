@@ -10,7 +10,7 @@ public class WelcomeWorld extends World
     
     Button startBtn = new Button(Color.RED, 100, 50, "Start");
     GreenfootImage selectImage = new GreenfootImage("select.png");
-    GreenfootSound bgMusic = new GreenfootSound("bg_music.wav");
+    GreenfootSound bgMusic = new GreenfootSound("song.mp3");
     Label employeeWageTitle = new Label("Hourly Wage",40);
     Label employeeWageLabel = new Label("$0/hr",40);
     Label utilitiesTitle = new Label("Hourly Utilities",35);
@@ -24,7 +24,8 @@ public class WelcomeWorld extends World
         new ValueItem(0, 0, 6),  // Counter Count
         new ValueItem(0, 0, 7),  // Grill Count
         new ValueItem(0, 0, 4),   // Fryer Count
-        new ValueItem(0, 0, 3)    // Fountain Count
+        new ValueItem(0, 0, 3),    // Fountain Count
+        new ValueItem(0,0,10),     // Janitor Count
     };
     
     /*
@@ -49,7 +50,8 @@ public class WelcomeWorld extends World
     // Display the wage per hour based on employee count and wage
     private void displayWage() {
         removeObject(employeeWageLabel);
-        employeeWageLabel = new Label("$"+valueItems[0].value*Constants.COOK_WAGE+"/hr",40);
+        int wage = valueItems[0].value*Constants.COOK_WAGE + valueItems[5].value*Constants.JANITOR_WAGE;
+        employeeWageLabel = new Label("$"+wage+"/hr",40);
         addObject(employeeWageLabel,getWidth()-100,100);
     }
     
@@ -74,7 +76,7 @@ public class WelcomeWorld extends World
         addObject(utilitiesLabel,getWidth()-100,200);
         
         // Names for each of the values stored in ValueItems
-        String[] valueNames = {"Cook Count", "Counter Count", "Grill Count", "Fryer Count", "Fountain Count"};
+        String[] valueNames = {"Cook Count", "Counter Count", "Grill Count", "Fryer Count", "Fountain Count", "Janitor Count"};
         int startY = 50; // Start Y position for the first value
         int spacing = 50; // Vertical spacing between items
     
@@ -120,11 +122,11 @@ public class WelcomeWorld extends World
         }
         
         Button startBtn = new Button(Color.YELLOW,200,50,"Run Simulation");
-        addObject(startBtn,getWidth()/2,getHeight()-50);
+        addObject(startBtn,getWidth()/2,getHeight()-35);
         startBtn.init();
         startBtn.setOnClickAction(() -> {
             // Send in user values to mainworld
-           MainWorld w = new MainWorld(valueItems[0].value,valueItems[1].value,valueItems[2].value,valueItems[3].value,valueItems[4].value);
+           MainWorld w = new MainWorld(valueItems[0].value,valueItems[1].value,valueItems[2].value,valueItems[3].value,valueItems[4].value,valueItems[5].value);
            Greenfoot.setWorld(w);
         });
     }

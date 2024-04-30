@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Janitor
+comment0.text=\r\n\ Janitor\ class\ cleans\ up\ trash\ made\ by\ customers.\r\n\ \r\n\ @author\ Bryson,\ Bonnie,\ Matthew\r\n
+comment1.params=
+comment1.target=Janitor()
+comment2.params=x1\ y1\ x2\ y2
+comment2.target=double\ getDistance(int,\ int,\ int,\ int)
+comment3.params=trash
+comment3.target=Trash\ findNearestTrash(java.lang.Class)
+comment4.params=
+comment4.target=void\ act()
+numComments=5

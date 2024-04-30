@@ -17,11 +17,13 @@ public class MainWorld extends World
     public static int GRILL_COUNT;
     public static int FRYER_COUNT;
     public static int FOUNTAIN_COUNT;
+    public static int JANITOR_COUNT;
     
     
     // Grab stats from a separate class as they are used in the starting world too.
     // Staff Wages
     public static final int COOK_WAGE = Constants.COOK_WAGE;
+    public static final int JANITOR_WAGE = Constants.JANITOR_WAGE;
     
     // Prices
     public static final int BURGER_PRICE = Constants.BURGER_PRICE;
@@ -56,13 +58,16 @@ public class MainWorld extends World
     
     public int money = 100; // Starting Money
     public int time = 9; // 9AM - 5PM
+    public int stars = 5;
     Label moneyLabel = new Label("$" + money,40);
     Label timeLabel = new Label(time+":00",40);
+    Label lunchLabel = new Label("MEAL RUSH",60);
+    private boolean addedRush = false;
     SimpleTimer wageTimer = new SimpleTimer(); // Keep track of when to pay wages.
     SimpleTimer utilTimer = new SimpleTimer(); // Keep track of when to pay utilities.
     SimpleTimer timer = new SimpleTimer(); // Keep track of the day time
     
-    
+        
     
     
     /**
@@ -74,7 +79,7 @@ public class MainWorld extends World
      * @param FRYER_COUNT Count of fryers in game
      * @param FOUNTAIN_COUNT Count of fountains in game
      */
-    public MainWorld(int COOK_COUNT, int COUNTER_COUNT, int GRILL_COUNT, int FRYER_COUNT, int FOUNTAIN_COUNT)
+    public MainWorld(int COOK_COUNT, int COUNTER_COUNT, int GRILL_COUNT, int FRYER_COUNT, int FOUNTAIN_COUNT, int JANITOR_COUNT)
     {    
         
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -85,6 +90,7 @@ public class MainWorld extends World
         this.GRILL_COUNT = GRILL_COUNT;
         this.FRYER_COUNT = FRYER_COUNT;
         this.FOUNTAIN_COUNT = FOUNTAIN_COUNT;
+        this.JANITOR_COUNT = JANITOR_COUNT;
         
         addObject(moneyLabel, 50, 50);
         // Spawn all equipment and employees based on the counts
@@ -92,13 +98,10 @@ public class MainWorld extends World
             Counter counter = new Counter();
             addObject(counter, (getWidth()/3)+30+50*i,(getHeight()/2)+50);
         }
-        for(int i = 0; i < COOK_COUNT; i++) {
-            Cook cook = new Cook();
-            addObject(cook,100+50*i,100);
-        }
+        
         for(int i = 0; i < GRILL_COUNT; i++) {
             Grill grill = new Grill();
-            addObject(grill,(getWidth()/4)+60*i,getHeight()/2-150);
+            addObject(grill,(getWidth()/4)+60*i,getHeight()/2-100);
         }
         for(int i = 0; i < FRYER_COUNT; i++) {
             Fryer fryer = new Fryer();
@@ -108,13 +111,31 @@ public class MainWorld extends World
             Fountain fountain = new Fountain();
             addObject(fountain,50,50+100*i);
         }
-        Pickup pickup = new Pickup();
-        addObject(pickup, (getWidth()/4),(getHeight()/2)+50);
-        Exit exit = new Exit();
-        addObject(exit,getWidth()/4 ,getHeight());
+        for(int i = 0; i < COOK_COUNT; i++) {
+            Cook cook = new Cook();
+            addObject(cook,100+50*i,getHeight()/2);
+        }
+        for(int i = 0; i < JANITOR_COUNT; i++) {
+            Janitor janitor = new Janitor();
+            addObject(janitor,100+50*i,getHeight()/2-50);
+        }
         
+        
+        // Spawn other equipment and furniture that have a fixed amount.
+        addObject(new Pickup(), (getWidth()/4),(getHeight()/2)+50);
+        addObject(new Exit(),getWidth()/4 ,getHeight());
+        addObject(new Menu(),(getWidth()/3)+60, (getHeight()/2));
+        addObject(new Menu(),(getWidth())-150, (getHeight()/2));
+        addObject(new Supplies(),getWidth()/6,getHeight() - 25 );    
+            
         timeLabel = new Label(time+":00 AM",40);
         addObject(timeLabel, 80, 80);
+        
+        // Show stars
+        for (int i = 0; i < 5; i++) {
+            Star s = new Star();
+            addObject(s,getWidth()/3+i*50,50);
+        }
     }
     
     /**
@@ -127,6 +148,40 @@ public class MainWorld extends World
     }
     
     
+    /*
+     * Displays the amount of stars that the restaurant has
+     * 
+     * @param stars the amount of stars the restaurant has
+     */
+    public void setStars(int stars) {
+        if (stars < 1 || stars > 5) return;
+        if(stars != this.stars) {
+            removeObjects(getObjects(Star.class));
+            for(int i = 0; i < stars; i++)  {
+                Star s = new Star();
+                addObject(s,getWidth()/3+i*50,50);
+            }
+            this.stars = stars;
+        }
+        
+    }
+    
+    
+    
+    public int getStars()
+    {
+        return this.stars;
+    }
+    
+    /*
+     * Used by customer to spawn trash at its location, must be cleaned by janitor.
+     * 
+     * @param customer The customer that is trashing
+     */
+    public void addTrash(Customer customer) {
+        addObject(new Trash(), customer.getX(),customer.getY());
+    }
+    
     // Handle all the timer events
     private void timerCheck() {
         // Every simulation hour is 10 real seconds,
@@ -134,7 +189,7 @@ public class MainWorld extends World
         if(wageTimer.millisElapsed() > 10000) {
             wageTimer.mark();
             // Employee Wages
-            money -= COOK_COUNT * COOK_WAGE;
+            money -= COOK_COUNT * COOK_WAGE + JANITOR_COUNT * JANITOR_WAGE;
         }
         if (utilTimer.millisElapsed() > 5000) {
             utilTimer.mark();
@@ -145,17 +200,21 @@ public class MainWorld extends World
             timer.mark();
             time++;
             // Get AM or PM
-            if(time < 13) {
+            if(time < 12) {
                 removeObject(timeLabel);
                 timeLabel = new Label(time+":00 AM",40);
+                addObject(timeLabel, 80, 80);
+            } else if (time == 12){
+                removeObject(timeLabel);
+                timeLabel = new Label(time+":00 PM",40);
                 addObject(timeLabel, 80, 80);
             } else {
                 removeObject(timeLabel);
                 timeLabel = new Label((time-12)+":00 PM",40);
                 addObject(timeLabel, 80, 80);
             }
-            // At 5PM, end simulation
-            if (time == 17) {
+            // At 10PM, end simulation
+            if (time == 22) {
                 EndWorld end = new EndWorld(money,stats);
                 Greenfoot.setWorld(end);
             }
@@ -163,7 +222,11 @@ public class MainWorld extends World
     }
     
     public void act() {
+        // Update stars (decrease star every 10 trash)
+        setStars(5-(getObjects(Trash.class).size()/10));
+        
         // Update Money
+        
         removeObject(moneyLabel);
         moneyLabel = new Label("$" + money,40);
         addObject(moneyLabel, 50, 50);
@@ -174,8 +237,22 @@ public class MainWorld extends World
             Greenfoot.setWorld(end);
         }
         
+        
+        int customerChance = 0;
+        // Increase customer spawns during lunch & dinner times
+        if((time > 10 && time < 14) || (time > 17 && time < 20)){
+            customerChance = 100;
+            // Display rush
+            if(!addedRush){
+                addObject(lunchLabel,getWidth()/2,getHeight()/2);
+                addedRush = true;
+            } 
+        } else {
+            addedRush = false;
+            removeObject(lunchLabel);
+        }
         // Spawn customers
-        if (Greenfoot.getRandomNumber (300) == 0){
+        if (Greenfoot.getRandomNumber (250-customerChance-(stars*20)) == 0){
             Customer c = new Customer();
             addObject(c,getWidth()/2+Greenfoot.getRandomNumber(getWidth()/2),getHeight()/2+getHeight()/4);
         }

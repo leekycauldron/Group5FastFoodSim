@@ -77,6 +77,16 @@ public class Customer extends Actor
         }
     }
     
+    // Customers may litter
+    protected void litter() {
+        if(Greenfoot.getRandomNumber(200) == 1) {
+            MainWorld w = (MainWorld) getWorld();
+            w.addTrash(this);
+        }
+    }
+    
+    
+    
     /*
      * Called by cook when the order is done, tells customer to exit restaurant.
      */
@@ -91,6 +101,7 @@ public class Customer extends Actor
             if(!intersects(getExit())) {
                 turnTowards(getExit().getX(),getExit().getY());
                 move(1);
+                litter();
                 setImage(customerGif.getCurrentImage());
                 getImage().scale(34,46);
             }  else  {
@@ -108,11 +119,12 @@ public class Customer extends Actor
                     if (!intersects(nearestCounter)) {
                         turnTowards(nearestCounter.getX(), nearestCounter.getY());
                         move(1); // Adjust the speed as needed
+                        litter();
                     } else {
                         order(nearestCounter);
                     }
                 } else {
-                    // 20% Chance to leave if no open counter.
+                    // 20% Chance to leave if no open counter (decrease stars).
                     if(!fullLeaveDecided) {
                         fullLeaveDecided = true;
                         if(Greenfoot.getRandomNumber(5) == 1) {
@@ -125,6 +137,7 @@ public class Customer extends Actor
                 if(getX()>getPickup().getX()) {
                     turnTowards(getPickup().getX(),getPickup().getY()+25);
                     move(1);
+                    litter();
                     setImage(customerGif.getCurrentImage());
                     getImage().scale(34,46);
                 } else {
