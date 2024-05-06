@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=SpeechBubble
+comment0.text=\r\n\ Speech\ Bubble\ Class\ that\ attaches\ to\ a\ customer\ and\ contains\ their\ order.\r\n\ \r\n\ @author\ Bryson\r\n
+comment1.params=text
+comment1.target=SpeechBubble(java.lang.String)
+comment2.params=text
+comment2.target=void\ setText(java.lang.String)
+comment3.params=
+comment3.target=void\ updateImage()
+numComments=4

@@ -14,12 +14,15 @@ public class Customer extends Actor
     protected String[] foodItems = {"burger", "hotdog"};
     protected String[] sideItems = {"fries","cola"};
     protected ArrayList<String> order = new ArrayList<String>();
+    private SpeechBubble speechBubble;
     protected boolean ordered = false;
  
     private int direction = 0;
     private boolean inPickupLine = false;
     private boolean exit = false;
     private boolean fullLeaveDecided = false; // if counters full, only decide to leave ONC    
+    
+    
     
 
     // Protected as the goal was to make multiple customer subclasses with different behaviour
@@ -65,13 +68,25 @@ public class Customer extends Actor
         if(!ordered){
             int foodAmt = Greenfoot.getRandomNumber(foodItems.length+1)+1; // Cannot be zero
             int sidesAmt = Greenfoot.getRandomNumber(sideItems.length+1);
+            String speechDisplay = "";
             for(int i = 0; i < foodAmt; i++) {
-                order.add(foodItems[Greenfoot.getRandomNumber(foodItems.length)]);
+                String str = foodItems[Greenfoot.getRandomNumber(foodItems.length)];
+                order.add(str);
+                speechDisplay += str + ", ";
             }
             
             for(int i = 0; i < sidesAmt; i++) {
-                order.add(sideItems[Greenfoot.getRandomNumber(sideItems.length)]);
+                String str = sideItems[Greenfoot.getRandomNumber(sideItems.length)];
+                order.add(str);
+                if(i+1 == sidesAmt) {
+                    speechDisplay += str;
+                } else {
+                    speechDisplay += str + ", ";
+                }
+                
             }
+            speechBubble = new SpeechBubble(speechDisplay);
+            getWorld().addObject(speechBubble, getX(), getY() - 50);
             counter.order(order,this);
             ordered = true;
         }
@@ -96,6 +111,12 @@ public class Customer extends Actor
     
     public void act() 
     {
+        try {
+            speechBubble.setLocation(getX(), getY() - 50);
+        } catch (Exception e){
+            // speech bubble does not exist
+        }
+        
         // True if order done, walk to exit then remove self.
         if(exit) {
             if(!intersects(getExit())) {
