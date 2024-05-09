@@ -15,11 +15,15 @@ public class Grill extends Equipment
     
     public Grill(){
         GreenfootImage g = getImage();
+<<<<<<< Updated upstream
         g.scale(75, 75);
     }
     
     public void act()
     {
         // Add your action code here.
+=======
+        g.scale(60, 60);
+>>>>>>> Stashed changes
     }
 }

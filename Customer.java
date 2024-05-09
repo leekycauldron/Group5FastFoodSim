@@ -9,7 +9,11 @@ import java.util.List;
  */
 public class Customer extends Actor
 {
+<<<<<<< Updated upstream
     GifImage customerGif = new GifImage("customerWalking.gif");
+=======
+    GreenfootSound walkingSound = new GreenfootSound("walking.mp3");
+>>>>>>> Stashed changes
     
     protected String[] foodItems = {"burger", "hotdog"};
     protected String[] sideItems = {"fries","cola"};
@@ -74,6 +78,7 @@ public class Customer extends Actor
     
     public void act() 
     {
+<<<<<<< Updated upstream
         if (!ordered) {
             getImage().scale(34,46);
             Counter nearestCounter = findNearestCounter(Counter.class);
@@ -96,6 +101,65 @@ public class Customer extends Actor
             }
         } else {
             setLocation(getWorld().getWidth()/2-100,getY());
+=======
+        try {
+            speechBubble.setLocation(getX(), getY() - 50);
+        } catch (Exception e){
+            // speech bubble does not exist
+        }
+        
+        // True if order done, walk to exit then remove self.
+        if(exit) {
+            if(!intersects(getExit())) {
+                turnTowards(getExit().getX(),getExit().getY());
+                move(1);
+                litter();
+                getImage().scale(34,34);
+            }  else  {
+                getPickup().subLineCount();
+                getWorld().removeObject(this);
+            }
+        } else {
+            // Walk to nearest open counter if not ordered, then order
+            if (!ordered) {
+                getImage().scale(34,34);
+                Counter nearestCounter = findNearestCounter(Counter.class);
+                if(nearestCounter != null) {
+                    getImage().scale(34,34);
+                    if (!intersects(nearestCounter)) {
+                        turnTowards(nearestCounter.getX(), nearestCounter.getY());
+                        move(1); // Adjust the speed as needed
+                        litter();
+                    } else {
+                        order(nearestCounter);
+                    }
+                } else {
+                    // 20% Chance to leave if no open counter (decrease stars).
+                    if(!fullLeaveDecided) {
+                        fullLeaveDecided = true;
+                        if(Greenfoot.getRandomNumber(5) == 1) {
+                            exit = true;
+                        }
+                    }
+                }
+            } else { //ordered
+                //walk to x coord of pickup counter
+                if(getX()>getPickup().getX()) {
+                    turnTowards(getPickup().getX(),getPickup().getY()+25);
+                    move(1);
+                    litter();
+                    getImage().scale(34,34);
+                } else {
+                    // move down if customers in line and add to line count
+                    if(!inPickupLine) {
+                        setLocation(getX(),getPickup().getY()+25+5*getPickup().getLineCount());
+                        getPickup().addLineCount();
+                        inPickupLine = true;
+                    }
+                }
+                
+            }
+>>>>>>> Stashed changes
         }
     }    
 }

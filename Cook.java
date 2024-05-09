@@ -9,7 +9,11 @@ import java.util.ArrayList;
  */
 public class Cook extends Employee
 {
+<<<<<<< Updated upstream
     GifImage cookGif = new GifImage("cook.gif");
+=======
+    GreenfootSound cookingSound = new GreenfootSound("cooking.mp3");
+>>>>>>> Stashed changes
     
     private boolean working = false; // when received order but may necessarily be at equipment
     private boolean cooking = false; // when using cooking equipment
@@ -26,8 +30,7 @@ public class Cook extends Employee
     private int maxY = 250; // Maximum Y-coordinate
 =======
     public Cook(){
-        setImage(cookGif.getCurrentImage());
-        getImage().scale(33, 53);
+        getImage().scale(36, 33);
     }
 >>>>>>> Stashed changes
     
@@ -134,8 +137,7 @@ public class Cook extends Employee
                     // Move towards the counter with an order
                     turnTowards(orderCounter.getX(), orderCounter.getY());
                     move(1); // Adjust the speed as needed
-                    setImage(cookGif.getCurrentImage());
-                    getImage().scale(33, 53);
+                    getImage().scale(36, 33);
                     if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
                         getImage().mirrorHorizontally();
                         isImageFlipped = !isImageFlipped; // Update the flipped state

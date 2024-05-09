@@ -41,9 +41,30 @@ public class MainWorld extends World
             Cook cook = new Cook();
             addObject(cook,100+50*i,100);
         }
+<<<<<<< Updated upstream
         for(int i = 0; i < GRILL_COUNT; i++) {
             Grill grill = new Grill();
             addObject(grill,(getWidth()/2)+70*i,getHeight()/2-150);
+=======
+        for(int i = 0; i < JANITOR_COUNT; i++) {
+            Janitor janitor = new Janitor();
+            addObject(janitor,100+50*i,getHeight()/2-50);
+        }
+        
+        
+        // Spawn other equipment and furniture that have a fixed amount.
+        addObject(new Pickup(), (getWidth()/4),(getHeight()/2)+50);
+        addObject(new Exit(),getWidth()/4 ,getHeight());
+        addObject(new Supplies(),getWidth()/6,getHeight() - 25 );    
+            
+        timeLabel = new Label(time+":00 AM",40);
+        addObject(timeLabel, 80, 80);
+        
+        // Show stars
+        for (int i = 0; i < 5; i++) {
+            Star s = new Star();
+            addObject(s,getWidth()/3+i*50,50);
+>>>>>>> Stashed changes
         }
     }
     
@@ -57,7 +78,32 @@ public class MainWorld extends World
         moneyLabel = new Label("$" + money,40);
         addObject(moneyLabel, 50, 50);
         
+<<<<<<< Updated upstream
         if (Greenfoot.getRandomNumber (60) == 0){
+=======
+        // Check money
+        if(money <= 0) {
+            EndWorld end = new EndWorld(money,stats);
+            Greenfoot.setWorld(end);
+        }
+        
+        
+        int customerChance = 0;
+        // Increase customer spawns during lunch & dinner times
+        if((time > 10 && time < 14) || (time > 17 && time < 20)){
+            customerChance = 100;
+            // Display rush
+            if(!addedRush){
+                addObject(lunchLabel,getWidth()/2,getHeight()/2);
+                addedRush = true;
+            } 
+        } else {
+            addedRush = false;
+            removeObject(lunchLabel);
+        }
+        // Spawn customers
+        if (Greenfoot.getRandomNumber (Constants.customerChance-customerChance-(stars*20)) == 0){
+>>>>>>> Stashed changes
             Customer c = new Customer();
             addObject(c,getWidth()/2+Greenfoot.getRandomNumber(getWidth()/2),getHeight()/2+getHeight()/4);
         }
