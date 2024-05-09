@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 public class Cook extends Employee
 {
-    GifImage cookGif = new GifImage("cook.gif");
     GreenfootSound cookingSound = new GreenfootSound("cooking.mp3");
     
     private boolean working = false; // Order received
@@ -23,15 +22,10 @@ public class Cook extends Employee
     private boolean addedMoney = false; // Keep track if added money from order.
     private boolean gotOrder = false; // If cook is done order and they need to give to customer.
     
-    
     public Cook(){
-        setImage(cookGif.getCurrentImage());
-        getImage().scale(33, 53);
+        getImage().scale(38,38);
     }
     
-    
-
-
     private Grill findGrill() {
         List<Grill> grills = getWorld().getObjects(Grill.class);
         for (Grill grill : grills) {
@@ -240,8 +234,7 @@ public class Cook extends Employee
                     // Move towards the counter with an order
                     turnTowards(orderCounter.getX(), orderCounter.getY());
                     move(1); // Adjust the speed as needed
-                    setImage(cookGif.getCurrentImage());
-                    getImage().scale(33, 53);
+                    getImage().scale(38,38);
                     if ((direction > 90 && direction < 270 && !isImageFlipped) || (direction <= 90 || direction >= 270) && isImageFlipped) {
                         getImage().mirrorHorizontally();
                         isImageFlipped = !isImageFlipped; // Update the flipped state

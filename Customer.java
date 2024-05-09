@@ -8,7 +8,6 @@ import java.util.List;
  */
 public class Customer extends Actor
 {
-    GifImage customerGif = new GifImage("customerWalking.gif");
     GreenfootSound walkingSound = new GreenfootSound("walking.mp3");
     
     protected String[] foodItems = {"burger", "hotdog"};
@@ -123,8 +122,7 @@ public class Customer extends Actor
                 turnTowards(getExit().getX(),getExit().getY());
                 move(1);
                 litter();
-                setImage(customerGif.getCurrentImage());
-                getImage().scale(34,46);
+                getImage().scale(35,35);
             }  else  {
                 getPickup().subLineCount();
                 getWorld().removeObject(this);
@@ -132,11 +130,10 @@ public class Customer extends Actor
         } else {
             // Walk to nearest open counter if not ordered, then order
             if (!ordered) {
-                getImage().scale(34,46);
+                getImage().scale(35,35);
                 Counter nearestCounter = findNearestCounter(Counter.class);
                 if(nearestCounter != null) {
-                    setImage(customerGif.getCurrentImage());
-                    getImage().scale(34,46);
+                    getImage().scale(35,35);
                     if (!intersects(nearestCounter)) {
                         turnTowards(nearestCounter.getX(), nearestCounter.getY());
                         move(1); // Adjust the speed as needed
@@ -159,8 +156,7 @@ public class Customer extends Actor
                     turnTowards(getPickup().getX(),getPickup().getY()+25);
                     move(1);
                     litter();
-                    setImage(customerGif.getCurrentImage());
-                    getImage().scale(34,46);
+                    getImage().scale(35,35);
                 } else {
                     // move down if customers in line and add to line count
                     if(!inPickupLine) {
