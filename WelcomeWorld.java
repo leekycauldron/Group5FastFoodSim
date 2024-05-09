@@ -12,9 +12,9 @@ public class WelcomeWorld extends World
     GreenfootImage selectImage = new GreenfootImage("select.png");
     GreenfootSound bgMusic = new GreenfootSound("song.mp3");
     Label employeeWageTitle = new Label("Hourly Wage",40);
-    Label employeeWageLabel = new Label("$0/hr",40);
+    Label employeeWageLabel = new Label("$0/hr",36);
     Label utilitiesTitle = new Label("Hourly Utilities",35);
-    Label utilitiesLabel = new Label("$0/hr",40);
+    Label utilitiesLabel = new Label("$0/hr",36);
     
     
     // Min, max, current value
@@ -51,8 +51,8 @@ public class WelcomeWorld extends World
     private void displayWage() {
         removeObject(employeeWageLabel);
         int wage = valueItems[0].value*Constants.COOK_WAGE + valueItems[5].value*Constants.JANITOR_WAGE;
-        employeeWageLabel = new Label("$"+wage+"/hr",40);
-        addObject(employeeWageLabel,getWidth()-100,100);
+        employeeWageLabel = new Label("$"+wage+"/hr",36);
+        addObject(employeeWageLabel,getWidth()-100,150);
     }
     
     
@@ -61,8 +61,8 @@ public class WelcomeWorld extends World
         removeObject(utilitiesLabel);
         int utilities = valueItems[1].value*Constants.COUNTER_PRICE + valueItems[2].value*Constants.GRILL_PRICE + valueItems[3].value*Constants.FRYER_PRICE + valueItems[4].value*Constants.FOUNTAIN_PRICE;
         // Multiple utilities by 2 because it charges every half hour
-        utilitiesLabel = new Label("$"+utilities*2+"/hr",40);
-        addObject(utilitiesLabel,getWidth()-100,200);
+        utilitiesLabel = new Label("$"+utilities*2+"/hr",36);
+        addObject(utilitiesLabel,getWidth()-100,250);
     }
     
     // Display the value menu
@@ -70,10 +70,10 @@ public class WelcomeWorld extends World
         
         setBackground(selectImage);
         removeObjects(getObjects(null)); // Clears the screen
-        addObject(employeeWageTitle,getWidth()-100,50);
-        addObject(employeeWageLabel,getWidth()-100,100);
-        addObject(utilitiesTitle,getWidth()-100,150);
-        addObject(utilitiesLabel,getWidth()-100,200);
+        addObject(employeeWageTitle,getWidth()-100,100);
+        addObject(employeeWageLabel,getWidth()-100,150);
+        addObject(utilitiesTitle,getWidth()-100,200);
+        addObject(utilitiesLabel,getWidth()-100,250);
         
         // Names for each of the values stored in ValueItems
         String[] valueNames = {"Cook Count", "Counter Count", "Grill Count", "Fryer Count", "Fountain Count", "Janitor Count"};

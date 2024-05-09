@@ -252,7 +252,7 @@ public class MainWorld extends World
             removeObject(lunchLabel);
         }
         // Spawn customers
-        if (Greenfoot.getRandomNumber (250-customerChance-(stars*20)) == 0){
+        if (Greenfoot.getRandomNumber (Constants.CUSTOMER_CHANCE-customerChance-(stars*20)) == 0){
             Customer c = new Customer();
             addObject(c,getWidth()/2+Greenfoot.getRandomNumber(getWidth()/2),getHeight()/2+getHeight()/4);
         }

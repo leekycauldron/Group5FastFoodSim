@@ -93,7 +93,7 @@ public class Customer extends Actor
     
     // Customers may litter
     protected void litter() {
-        if(Greenfoot.getRandomNumber(200) == 1) {
+        if(Greenfoot.getRandomNumber(300) == 1) {
             MainWorld w = (MainWorld) getWorld();
             w.addTrash(this);
         }
