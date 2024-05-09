@@ -7,11 +7,9 @@ import java.util.ArrayList;
  */
 public class Janitor extends Employee
 {
-    GifImage janitorGif = new GifImage("janitor.gif");
     private boolean gotBroom = false;
     public Janitor() {
-        setImage(janitorGif.getCurrentImage());
-        getImage().scale(30, 30);
+        getImage().scale(35, 35);
     }
     
     
